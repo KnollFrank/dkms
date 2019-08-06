@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from backend import views
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^api/backend/$', views.customers_list),
+    url(r'^api/backend/(?P<pk>[0-9]+)$', views.customers_detail),
 ]
