@@ -3,7 +3,7 @@ import CustomersService from './CustomersService';
 
 const customersService = new CustomersService();
 
-class CustomerCreateUpdate extends Component {
+class CustomerCreate extends Component {
 
       constructor(props) {
         super(props);
@@ -112,4 +112,4 @@ class CustomerCreateUpdate extends Component {
       }
 }
 
-export default CustomerCreateUpdate;
+export default CustomerCreate;
