@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import CustomersService from './CustomersService';
 
-const customersService = new CustomersService();
-
 class CustomerCreate extends Component {
 
       constructor(props) {
         super(props);
-
+        this.createCustomer = new CustomersService().createCustomer;
         this.handleSubmit = this.handleSubmit.bind(this);
       }
 
       handleCreate(){
-        customersService.createCustomer(
+        this.createCustomer(
           {
             "first_name": this.refs.firstName.value,
             "last_name": this.refs.lastName.value,
@@ -28,36 +26,9 @@ class CustomerCreate extends Component {
         });
       }
 
-      handleUpdate(pk){
-        customersService.updateCustomer(
-          {
-            "pk": pk,
-            "first_name": this.refs.firstName.value,
-            "last_name": this.refs.lastName.value,
-            "email": this.refs.email.value,
-            "phone": this.refs.phone.value,
-            "address": this.refs.address.value,
-            "description": this.refs.description.value
-        }
-        ).then((result)=>{
-          console.log(result);
-          alert("Customer updated!");
-        }).catch(()=>{
-          alert('There was an error! Please re-check your form.');
-        });
-      }
-
       handleSubmit(event) {
         const { match: { params } } = this.props;
-
-        if(params && params.pk){
-          this.handleUpdate(params.pk);
-        }
-        else
-        {
-          this.handleCreate();
-        }
-
+        this.handleCreate();
         event.preventDefault();
       }
 
