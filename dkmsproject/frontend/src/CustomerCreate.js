@@ -11,21 +11,6 @@ class CustomerCreate extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
       }
 
-      componentDidMount(){
-        const { match: { params } } = this.props;
-        if(params && params.pk)
-        {
-          customersService.getCustomer(params.pk).then((c)=>{
-            this.refs.firstName.value = c.first_name;
-            this.refs.lastName.value = c.last_name;
-            this.refs.email.value = c.email;
-            this.refs.phone.value = c.phone;
-            this.refs.address.value = c.address;
-            this.refs.description.value = c.description;
-          })
-        }
-      }
-
       handleCreate(){
         customersService.createCustomer(
           {
