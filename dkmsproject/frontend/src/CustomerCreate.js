@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import CustomersService from './CustomersService';
 
 class CustomerCreate extends Component {
 
       constructor(props) {
         super(props);
-        this.createCustomer = new CustomersService().createCustomer;
         this.handleSubmit = this.handleSubmit.bind(this);
       }
 
       handleCreate(){
-        this.createCustomer(
+        this.props.createCustomer(
           {
             "first_name": this.refs.firstName.value,
             "last_name": this.refs.lastName.value,
