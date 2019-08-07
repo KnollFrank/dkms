@@ -5,6 +5,6 @@ export default class CustomersService{
 
     createCustomer(customer){
         const url = `${API_URL}/api/backend/`;
-        return axios.post(url,customer);
+        return axios.post(url, customer);
     }
 }
