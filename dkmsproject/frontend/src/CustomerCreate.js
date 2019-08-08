@@ -36,7 +36,7 @@ export default class CustomerCreate extends React.Component {
       return (
         <form>
           <div className="form-group">
-            <label>First Name:</label>
+            <label htmlFor='first_name'>First Name:</label>
             <input
               className="form-control"
               type="text"
@@ -45,7 +45,7 @@ export default class CustomerCreate extends React.Component {
               onChange={this.handleUserInput}
             />
 
-            <label>Last Name:</label>
+            <label htmlFor='last_name'>Last Name:</label>
             <input
               className="form-control"
               type="text"
@@ -54,7 +54,7 @@ export default class CustomerCreate extends React.Component {
               onChange={this.handleUserInput}
             />
 
-            <label>Email:</label>
+            <label htmlFor='email'>Email:</label>
             <input
               className="form-control"
               type="text"
@@ -63,7 +63,7 @@ export default class CustomerCreate extends React.Component {
               onChange={this.handleUserInput}
             />
 
-            <label>Phone:</label>
+            <label htmlFor='phone'>Phone:</label>
             <input
               className="form-control"
               type="text"
@@ -72,7 +72,7 @@ export default class CustomerCreate extends React.Component {
               onChange={this.handleUserInput}
             />
 
-            <label>Address:</label>
+            <label htmlFor='address'>Address:</label>
             <input
               className="form-control"
               type="text"
@@ -81,7 +81,7 @@ export default class CustomerCreate extends React.Component {
               onChange={this.handleUserInput}
             />
 
-            <label>Description:</label>
+            <label htmlFor='description'>Description:</label>
             <textarea
               className="form-control"
               name="description"
