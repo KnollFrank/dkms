@@ -57,7 +57,7 @@ export default class CustomerCreate extends React.Component {
             <label htmlFor='email'>Email:</label>
             <input
               className="form-control"
-              type="text"
+              type="email"
               name="email"
               value={this.state.email}
               onChange={this.handleUserInput}
