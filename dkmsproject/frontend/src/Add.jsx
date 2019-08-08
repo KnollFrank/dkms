@@ -12,7 +12,7 @@ export default class Add extends React.Component {
 
     handleAdd(e) {
         e.preventDefault();
-        this.props.onAdd(this.state.name);
+        this.props.onAdd(this.state);
     }
 
     render() {
