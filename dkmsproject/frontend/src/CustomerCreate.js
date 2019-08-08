@@ -1,5 +1,6 @@
 // adapted from https://www.codementor.io/vijayst/unit-testing-react-components-jest-or-enzyme-du1087lh8
 import React from 'react';
+import Form from './Form';
 
 export default class CustomerCreate extends React.Component {
     constructor(props) {
@@ -34,64 +35,93 @@ export default class CustomerCreate extends React.Component {
 
     render() {
       return (
-        <form>
-          <div className="form-group">
-            <label htmlFor='first_name'>First Name:</label>
-            <input
-              className="form-control"
-              type="text"
-              name="first_name"
-              value={this.state.first_name}
-              onChange={this.handleUserInput}
-            />
+        <div className={"container pt-4"}>
+          <div className={"row justify-content-center"}>
+            <div className={"card"}>
+              <h5 className={"card-header"}>
+                Validation Test Form
+              </h5>
+              <div className={"card-body"}>
+                <form>
+                  <div className="form-group">
+                    <label htmlFor='first_name'>First Name:</label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="first_name"
+                      value={this.state.first_name}
+                      onChange={this.handleUserInput}
+                    />
+                  </div>
 
-            <label htmlFor='last_name'>Last Name:</label>
-            <input
-              className="form-control"
-              type="text"
-              name="last_name"
-              value={this.state.last_name}
-              onChange={this.handleUserInput}
-            />
+                  <div className="form-group">
+                    <label htmlFor='last_name'>Last Name:</label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="last_name"
+                      value={this.state.last_name}
+                      onChange={this.handleUserInput}
+                    />
+                  </div>
 
-            <label htmlFor='email'>Email:</label>
-            <input
-              className="form-control"
-              type="email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleUserInput}
-            />
+                  <div className="form-group">
+                    <label htmlFor='email'>Email:</label>
+                    <input
+                      className="form-control"
+                      type="email"
+                      name="email"
+                      value={this.state.email}
+                      onChange={this.handleUserInput}
+                    />
+                  </div>
 
-            <label htmlFor='phone'>Phone:</label>
-            <input
-              className="form-control"
-              type="text"
-              name="phone"
-              value={this.state.phone}
-              onChange={this.handleUserInput}
-            />
+                  <div className="form-group">
+                    <label htmlFor='phone'>Phone:</label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="phone"
+                      value={this.state.phone}
+                      onChange={this.handleUserInput}
+                    />
+                  </div>
 
-            <label htmlFor='address'>Address:</label>
-            <input
-              className="form-control"
-              type="text"
-              name="address"
-              value={this.state.address}
-              onChange={this.handleUserInput}
-            />
+                  <div className="form-group">
+                    <label htmlFor='address'>Address:</label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="address"
+                      value={this.state.address}
+                      onChange={this.handleUserInput}
+                    />
+                  </div>
 
-            <label htmlFor='description'>Description:</label>
-            <textarea
-              className="form-control"
-              name="description"
-              value={this.state.description}
-              onChange={this.handleUserInput}
-            />
+                  <div className="form-group">
+                    <label htmlFor='description'>Description:</label>
+                    <textarea
+                      className="form-control"
+                      name="description"
+                      value={this.state.description}
+                      onChange={this.handleUserInput}
+                    />
+                  </div>
 
-            <button className="btn btn-primary" onClick={this.submit}>Submit</button>
+                  <div className={"row justify-content-md-center"}>
+                    <div className={"col-sm-12"}>
+                      <button type={"submit"}
+                              className="btn btn-primary mb-2"
+                              onClick={this.submit}>
+                              Submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
-        </form>
+        </div>
       );
     }
 }
