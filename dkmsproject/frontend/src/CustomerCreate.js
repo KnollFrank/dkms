@@ -12,10 +12,10 @@ export default class CustomerCreate extends React.Component {
         address: '',
         description: ''
       };
-      this.handleAdd = this.handleAdd.bind(this);
+      this.submit = this.submit.bind(this);
     }
 
-    handleAdd(e) {
+    submit(e) {
         e.preventDefault();
         try {
           this.props.createCustomer(this.state);
@@ -82,7 +82,7 @@ export default class CustomerCreate extends React.Component {
               onChange={e => this.setState({ description: e.target.value })}
             />
 
-            <button className="btn btn-primary" onClick={this.handleAdd}>Submit</button>
+            <button className="btn btn-primary" onClick={this.submit}>Submit</button>
           </div>
         </form>
       );
