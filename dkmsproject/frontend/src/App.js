@@ -6,7 +6,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <CustomerCreate match="" createCustomer={new CustomersService().createCustomer}/>
+      <CustomerCreate createCustomer={new CustomersService().createCustomer}/>
     );
   }
 }
