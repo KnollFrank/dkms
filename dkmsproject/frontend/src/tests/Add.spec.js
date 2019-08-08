@@ -23,7 +23,7 @@ describe('Add', () => {
 
   it('Button click calls onAdd', () => {
     const button = add.find('button').first();
-    const input = add.find('input').first();
+    const input = add.find('input[name="name"]').first();
     input.simulate('change', { target: { value: 'Name 4' } });
     button.simulate('click');
     expect(onAdd).toBeCalledWith('Name 4');
