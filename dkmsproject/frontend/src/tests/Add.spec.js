@@ -22,14 +22,14 @@ describe('Add', () => {
   });
 
   it('Button click calls onAdd', () => {
-    const input = add.find('input[name="name"]').first();
-    input.simulate('change', { target: { value: 'Name 4' } });
+    const first_name_input = add.find('input[name="first_name"]').first();
+    first_name_input.simulate('change', { target: { value: 'some first_name' } });
 
-    const input2 = add.find('input[name="name2"]').first();
-    input2.simulate('change', { target: { value: 'Name 5' } });
+    const last_name_input = add.find('input[name="last_name"]').first();
+    last_name_input.simulate('change', { target: { value: 'some last_name' } });
 
     const button = add.find('button').first();
     button.simulate('click');
-    expect(onAdd).toBeCalledWith({"name": 'Name 4', "name2": 'Name 5'});
+    expect(onAdd).toBeCalledWith({first_name: 'some first_name', last_name: 'some last_name'});
   });
 });

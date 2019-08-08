@@ -5,8 +5,8 @@ export default class Add extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        name: '',
-        name2: ''
+        first_name: '',
+        last_name: ''
       };
       this.handleAdd = this.handleAdd.bind(this);
     }
@@ -21,17 +21,17 @@ export default class Add extends React.Component {
         <form>
           <input
             type="text"
-            name="name"
+            name="first_name"
             value={this.state.name}
-            onChange={e => this.setState({ name: e.target.value })}
+            onChange={e => this.setState({ first_name: e.target.value })}
           >
           </input>
 
           <input
             type="text"
-            name="name2"
+            name="last_name"
             value={this.state.name2}
-            onChange={e => this.setState({ name2: e.target.value })}
+            onChange={e => this.setState({ last_name: e.target.value })}
           >
           </input>
 
