@@ -50,8 +50,11 @@ describe('CustomerCreate', () => {
     enter('textarea[name="description"]', customer.description);
 
     // And clicking the send button
-    const button = customerCreate.find('button').first();
-    button.simulate('click');
+    // const button = customerCreate.find('button').first();
+    // console.log('buton: ', button)
+    // button.simulate('click');
+    // customerCreate.find('form').simulate('submit', { preventDefault () {} });
+    customerCreate.find('form').simulate('submit');
 
     // Then
     expect(createCustomer).toBeCalledWith(customer);

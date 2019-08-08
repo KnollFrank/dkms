@@ -17,8 +17,7 @@ export default class CustomerCreate extends React.Component {
       this.handleUserInput = this.handleUserInput.bind(this);
     }
 
-    submit(e) {
-        e.preventDefault();
+    submit() {
         try {
           this.props.createCustomer(this.state);
           alert("Customer created!");
@@ -42,16 +41,18 @@ export default class CustomerCreate extends React.Component {
                 Validation Test Form
               </h5>
               <div className={"card-body"}>
-                <form>
+                <Form submit={this.submit}>
                   <div className="form-group">
                     <label htmlFor='first_name'>First Name:</label>
                     <input
                       className="form-control"
+                      required={true}
                       type="text"
                       name="first_name"
                       value={this.state.first_name}
                       onChange={this.handleUserInput}
                     />
+                    <div className="invalid-feedback" />
                   </div>
 
                   <div className="form-group">
@@ -63,6 +64,7 @@ export default class CustomerCreate extends React.Component {
                       value={this.state.last_name}
                       onChange={this.handleUserInput}
                     />
+                    <div className="invalid-feedback" />
                   </div>
 
                   <div className="form-group">
@@ -74,6 +76,7 @@ export default class CustomerCreate extends React.Component {
                       value={this.state.email}
                       onChange={this.handleUserInput}
                     />
+                    <div className="invalid-feedback" />
                   </div>
 
                   <div className="form-group">
@@ -85,6 +88,8 @@ export default class CustomerCreate extends React.Component {
                       value={this.state.phone}
                       onChange={this.handleUserInput}
                     />
+                    <small className="form-text text-muted">Must be at least 6 characters long, contain letters and numbers</small>
+                    <div className="invalid-feedback" />
                   </div>
 
                   <div className="form-group">
@@ -96,6 +101,7 @@ export default class CustomerCreate extends React.Component {
                       value={this.state.address}
                       onChange={this.handleUserInput}
                     />
+                    <div className="invalid-feedback" />
                   </div>
 
                   <div className="form-group">
@@ -106,18 +112,18 @@ export default class CustomerCreate extends React.Component {
                       value={this.state.description}
                       onChange={this.handleUserInput}
                     />
+                    <div className="invalid-feedback" />
                   </div>
 
                   <div className={"row justify-content-md-center"}>
                     <div className={"col-sm-12"}>
                       <button type={"submit"}
-                              className="btn btn-primary mb-2"
-                              onClick={this.submit}>
+                              className="btn btn-primary mb-2">
                               Submit
                       </button>
                     </div>
                   </div>
-                </form>
+                </Form>
               </div>
             </div>
           </div>
