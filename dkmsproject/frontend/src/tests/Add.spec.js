@@ -5,15 +5,15 @@ import Add from '../Add.jsx';
 
 describe('Add', () => {
   let add;
-  let onAdd;
+  let createCustomer;
 
   beforeEach(() => {
-    onAdd = jest.fn();
-    add = mount(<Add onAdd={onAdd} />);
+    createCustomer = jest.fn();
+    add = mount(<Add createCustomer={createCustomer} />);
   });
 
-  it('Add requires onAdd prop', () => {
-    expect(add.props().onAdd).toBeDefined();
+  it('Add requires createCustomer prop', () => {
+    expect(add.props().createCustomer).toBeDefined();
   });
 
   it('Add renders button', () => {
@@ -43,7 +43,7 @@ describe('Add', () => {
     const button = add.find('button').first();
     button.simulate('click');
 
-    expect(onAdd).toBeCalledWith(
+    expect(createCustomer).toBeCalledWith(
       {
         first_name: 'some first_name',
         last_name: 'some last_name',
