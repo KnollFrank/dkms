@@ -6,7 +6,8 @@ export default class Add extends React.Component {
       super(props);
       this.state = {
         first_name: '',
-        last_name: ''
+        last_name: '',
+        email: ''
       };
       this.handleAdd = this.handleAdd.bind(this);
     }
@@ -31,6 +32,13 @@ export default class Add extends React.Component {
             name="last_name"
             value={this.state.last_name}
             onChange={e => this.setState({ last_name: e.target.value })}
+          />
+
+          <input
+            type="text"
+            name="email"
+            value={this.state.email}
+            onChange={e => this.setState({ email: e.target.value })}
           />
 
           <button onClick={this.handleAdd}>Add</button>

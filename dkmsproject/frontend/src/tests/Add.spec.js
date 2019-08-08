@@ -28,8 +28,17 @@ describe('Add', () => {
     const last_name_input = add.find('input[name="last_name"]').first();
     last_name_input.simulate('change', { target: { value: 'some last_name' } });
 
+    const email_input = add.find('input[name="email"]').first();
+    email_input.simulate('change', { target: { value: 'some email' } });
+
     const button = add.find('button').first();
     button.simulate('click');
-    expect(onAdd).toBeCalledWith({first_name: 'some first_name', last_name: 'some last_name'});
+
+    expect(onAdd).toBeCalledWith(
+      {
+        first_name: 'some first_name',
+        last_name: 'some last_name',
+        email: 'some email'
+      });
   });
 });
