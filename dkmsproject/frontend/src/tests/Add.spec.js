@@ -31,6 +31,9 @@ describe('Add', () => {
     const email_input = add.find('input[name="email"]').first();
     email_input.simulate('change', { target: { value: 'some email' } });
 
+    const phone_input = add.find('input[name="phone"]').first();
+    phone_input.simulate('change', { target: { value: '12345' } });
+
     const button = add.find('button').first();
     button.simulate('click');
 
@@ -38,7 +41,8 @@ describe('Add', () => {
       {
         first_name: 'some first_name',
         last_name: 'some last_name',
-        email: 'some email'
+        email: 'some email',
+        phone: '12345'
       });
   });
 });
