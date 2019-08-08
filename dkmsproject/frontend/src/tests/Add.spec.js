@@ -34,6 +34,12 @@ describe('Add', () => {
     const phone_input = add.find('input[name="phone"]').first();
     phone_input.simulate('change', { target: { value: '12345' } });
 
+    const address_input = add.find('input[name="address"]').first();
+    address_input.simulate('change', { target: { value: 'some address' } });
+
+    const description_input = add.find('textarea[name="description"]').first();
+    description_input.simulate('change', { target: { value: 'some description' } });
+
     const button = add.find('button').first();
     button.simulate('click');
 
@@ -42,7 +48,9 @@ describe('Add', () => {
         first_name: 'some first_name',
         last_name: 'some last_name',
         email: 'some email',
-        phone: '12345'
+        phone: '12345',
+        address: 'some address',
+        description: 'some description'
       });
   });
 });

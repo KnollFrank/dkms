@@ -8,7 +8,9 @@ export default class Add extends React.Component {
         first_name: '',
         last_name: '',
         email: '',
-        phone: ''
+        phone: '',
+        address: '',
+        description: ''
       };
       this.handleAdd = this.handleAdd.bind(this);
     }
@@ -47,6 +49,19 @@ export default class Add extends React.Component {
             name="phone"
             value={this.state.phone}
             onChange={e => this.setState({ phone: e.target.value })}
+          />
+
+          <input
+            type="text"
+            name="address"
+            value={this.state.address}
+            onChange={e => this.setState({ address: e.target.value })}
+          />
+
+          <textarea
+            name="description"
+            value={this.state.description}
+            onChange={e => this.setState({ description: e.target.value })}
           />
 
           <button onClick={this.handleAdd}>Add</button>
