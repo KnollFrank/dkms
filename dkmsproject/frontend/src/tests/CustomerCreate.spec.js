@@ -26,35 +26,34 @@ describe('CustomerCreate', () => {
   });
 
   it('Button click calls createCustomer', () => {
-    const first_name_input = customerCreate.find('input[name="first_name"]').first();
-    first_name_input.simulate('change', { target: { value: 'some first_name' } });
+    function enter(selector, text) {
+      const input = customerCreate.find(selector).first();
+      input.simulate('change', { target: { value: text } });
+    }
 
-    const last_name_input = customerCreate.find('input[name="last_name"]').first();
-    last_name_input.simulate('change', { target: { value: 'some last_name' } });
+    // Given
+    let customer = {
+      first_name: 'some first_name',
+      last_name: 'some last_name',
+      email: 'some email',
+      phone: '12345',
+      address: 'some address',
+      description: 'some description'
+    };
 
-    const email_input = customerCreate.find('input[name="email"]').first();
-    email_input.simulate('change', { target: { value: 'some email' } });
+    // When entering a customer
+    enter('input[name="first_name"]', customer.first_name);
+    enter('input[name="last_name"]', customer.last_name);
+    enter('input[name="email"]', customer.email);
+    enter('input[name="phone"]', customer.phone);
+    enter('input[name="address"]', customer.address);
+    enter('textarea[name="description"]', customer.description);
 
-    const phone_input = customerCreate.find('input[name="phone"]').first();
-    phone_input.simulate('change', { target: { value: '12345' } });
-
-    const address_input = customerCreate.find('input[name="address"]').first();
-    address_input.simulate('change', { target: { value: 'some address' } });
-
-    const description_input = customerCreate.find('textarea[name="description"]').first();
-    description_input.simulate('change', { target: { value: 'some description' } });
-
+    // And clicking the send button
     const button = customerCreate.find('button').first();
     button.simulate('click');
 
-    expect(createCustomer).toBeCalledWith(
-      {
-        first_name: 'some first_name',
-        last_name: 'some last_name',
-        email: 'some email',
-        phone: '12345',
-        address: 'some address',
-        description: 'some description'
-      });
+    // Then
+    expect(createCustomer).toBeCalledWith(customer);
   });
 });
