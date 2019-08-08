@@ -22,18 +22,16 @@ export default class Add extends React.Component {
           <input
             type="text"
             name="first_name"
-            value={this.state.name}
+            value={this.state.first_name}
             onChange={e => this.setState({ first_name: e.target.value })}
-          >
-          </input>
+          />
 
           <input
             type="text"
             name="last_name"
-            value={this.state.name2}
+            value={this.state.last_name}
             onChange={e => this.setState({ last_name: e.target.value })}
-          >
-          </input>
+          />
 
           <button onClick={this.handleAdd}>Add</button>
         </form>
