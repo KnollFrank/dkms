@@ -3,7 +3,10 @@ import expect from 'expect';
 import { mount } from 'enzyme';
 import Add from '../Add.jsx';
 
+window.alert = jest.fn();
+
 describe('Add', () => {
+  window.alert.mockClear();
   let add;
   let createCustomer;
 

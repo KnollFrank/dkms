@@ -17,7 +17,12 @@ export default class Add extends React.Component {
 
     handleAdd(e) {
         e.preventDefault();
-        this.props.createCustomer(this.state);
+        try {
+          this.props.createCustomer(this.state);
+          alert("Customer created!");
+        } catch(err) {
+          alert('There was an error! Please re-check your form.');
+        }
     }
 
     render() {
