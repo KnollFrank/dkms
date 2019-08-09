@@ -1,4 +1,4 @@
-describe("Django REST framework / React quickstart app", () => {
+describe("CustomerCreate web form", () => {
   const customer = {
     first_name: 'some first_name',
     last_name: 'some last_name',
@@ -9,14 +9,15 @@ describe("Django REST framework / React quickstart app", () => {
   };
 
   before(() => {
-    // cy.exec("npm run flush");
+    cy.exec("npm run flush");
   });
 
-  it("should be able to fill a web form", () => {
+  it("should be able to create a customer using a web form", () => {
+    // Given a web form
     cy.visit("/");
 
     // cy.pause()
-
+    // When entering a customer into the web form
     cy
       .get('input[name="first_name"]')
       .type(customer.first_name)
@@ -47,17 +48,22 @@ describe("Django REST framework / React quickstart app", () => {
       .type(customer.description)
       .should("have.value", customer.description);
 
+    // And submitting the web form
     cy.get("form").submit();
 
+    // Then the entered customer has been saved to the database
     cy
-      .request("http://127.0.0.1:8000/api/backend/28")
+      .request("http://127.0.0.1:8000/api/backend/")
       .then((response) => {
-        expect(response.body).to.have.property('first_name', customer.first_name)
-        expect(response.body).to.have.property('last_name', customer.last_name)
-        expect(response.body).to.have.property('email', customer.email)
-        expect(response.body).to.have.property('phone', customer.phone)
-        expect(response.body).to.have.property('address', customer.address)
-        expect(response.body).to.have.property('description', customer.description)
+        // see https://www.chaijs.com/api/bdd/#method_lengthof
+        expect(response.body.data).to.lengthOf(1);
+        const customer_actual = response.body.data[0];
+        expect(customer_actual).to.have.property('first_name', customer.first_name)
+        expect(customer_actual).to.have.property('last_name', customer.last_name)
+        expect(customer_actual).to.have.property('email', customer.email)
+        expect(customer_actual).to.have.property('phone', customer.phone)
+        expect(customer_actual).to.have.property('address', customer.address)
+        expect(customer_actual).to.have.property('description', customer.description)
        });
   });
   // more tests here
