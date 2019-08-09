@@ -9,12 +9,13 @@ describe("Django REST framework / React quickstart app", () => {
   };
 
   before(() => {
-    // cy.exec("npm run dev");
-    cy.exec("npm run flush");
+    // cy.exec("npm run flush");
   });
 
   it("should be able to fill a web form", () => {
     cy.visit("/");
+
+    // cy.pause()
 
     cy
       .get('input[name="first_name"]')
@@ -47,6 +48,17 @@ describe("Django REST framework / React quickstart app", () => {
       .should("have.value", customer.description);
 
     cy.get("form").submit();
+
+    cy
+      .request("http://127.0.0.1:8000/api/backend/28")
+      .then((response) => {
+        expect(response.body).to.have.property('first_name', customer.first_name)
+        expect(response.body).to.have.property('last_name', customer.last_name)
+        expect(response.body).to.have.property('email', customer.email)
+        expect(response.body).to.have.property('phone', customer.phone)
+        expect(response.body).to.have.property('address', customer.address)
+        expect(response.body).to.have.property('description', customer.description)
+       });
   });
   // more tests here
 });
