@@ -12,7 +12,7 @@ describe("CustomerCreate web form", () => {
     cy.exec("npm run flush");
   });
 
-  it("should be able to create a customer using a web form", () => {
+  it("should create a customer using a web form", () => {
     // Given a web form
     cy.visit("/");
 
