@@ -27,7 +27,7 @@ export default class CustomerCreate extends React.Component {
     }
 
     handleUserInput(e) {
-      const name = e.currentTarget.name;
+      const name = e.target.name;
       const value = e.target.value;
       this.setState({[name]: value});
     }
