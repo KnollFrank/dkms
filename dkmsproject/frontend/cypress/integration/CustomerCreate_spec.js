@@ -10,7 +10,7 @@ describe("Django REST framework / React quickstart app", () => {
 
   before(() => {
     // cy.exec("npm run dev");
-    // cy.exec("npm run flush");
+    cy.exec("npm run flush");
   });
 
   it("should be able to fill a web form", () => {

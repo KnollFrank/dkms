@@ -10,8 +10,8 @@
     "react-scripts": "3.0.1"
   },
   "scripts": {
-    "flush": "pipenv run python ./dkmsproject/manage.py flush --no-input",
-    "e2e": "cypress open --project ./dkmsproject/frontend/",
+    "flush": "python ../manage.py flush --no-input",
+    "e2e": "cypress open --project .",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
