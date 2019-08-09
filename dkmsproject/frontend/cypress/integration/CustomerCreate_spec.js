@@ -9,8 +9,8 @@ describe("Django REST framework / React quickstart app", () => {
   };
 
   before(() => {
-    cy.exec("npm run dev");
-    cy.exec("npm run flush");
+    // cy.exec("npm run dev");
+    // cy.exec("npm run flush");
   });
 
   it("should be able to fill a web form", () => {
@@ -42,7 +42,7 @@ describe("Django REST framework / React quickstart app", () => {
       .should("have.value", customer.address);
 
     cy
-      .get('input[name="description"]')
+      .get('textarea[name="description"]')
       .type(customer.description)
       .should("have.value", customer.description);
 
