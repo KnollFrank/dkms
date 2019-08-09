@@ -1,0 +1,52 @@
+describe("Django REST framework / React quickstart app", () => {
+  const customer = {
+    first_name: 'some first_name',
+    last_name: 'some last_name',
+    email: 'email@web.de',
+    phone: '12345',
+    address: 'some address',
+    description: 'some description'
+  };
+
+  before(() => {
+    cy.exec("npm run dev");
+    cy.exec("npm run flush");
+  });
+
+  it("should be able to fill a web form", () => {
+    cy.visit("/");
+
+    cy
+      .get('input[name="first_name"]')
+      .type(customer.first_name)
+      .should("have.value", customer.first_name);
+
+    cy
+      .get('input[name="last_name"]')
+      .type(customer.last_name)
+      .should("have.value", customer.last_name);
+
+    cy
+      .get('input[name="email"]')
+      .type(customer.email)
+      .should("have.value", customer.email);
+
+    cy
+      .get('input[name="phone"]')
+      .type(customer.phone)
+      .should("have.value", customer.phone);
+
+    cy
+      .get('input[name="address"]')
+      .type(customer.address)
+      .should("have.value", customer.address);
+
+    cy
+      .get('input[name="description"]')
+      .type(customer.description)
+      .should("have.value", customer.description);
+
+    cy.get("form").submit();
+  });
+  // more tests here
+});
