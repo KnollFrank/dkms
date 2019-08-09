@@ -32,10 +32,10 @@ describe('CustomerCreate', () => {
     }
 
     // Given
-    let customer = {
+    const customer = {
       first_name: 'some first_name',
       last_name: 'some last_name',
-      email: 'some email',
+      email: 'email@web.de',
       phone: '12345',
       address: 'some address',
       description: 'some description'
