@@ -1,20 +1,21 @@
 describe("CustomerCreate web form", () => {
-  const customer = {
-    first_name: 'some first_name',
-    last_name: 'some last_name',
-    email: 'email@web.de',
-    phone: '12345',
-    address: 'some address',
-    description: 'some description'
-  };
-
-  before(() => {
+  beforeEach(() => {
     cy.exec("npm run flush");
   });
 
   it("should create a customer using a web form", () => {
     // Given a web form
     cy.visit("/");
+
+    // And a customer
+    const customer = {
+      first_name: 'some first_name',
+      last_name: 'some last_name',
+      email: 'email@web.de',
+      phone: '12345',
+      address: 'some address',
+      description: 'some description'
+    };
 
     // cy.pause()
     // When entering a customer into the web form
@@ -66,5 +67,26 @@ describe("CustomerCreate web form", () => {
         expect(customer_actual).to.have.property('description', customer.description)
        });
   });
-  // more tests here
+
+  it("should not accept an invalid email", () => {
+    cy.visit("/");
+
+    cy
+      .get('input[name="email"]')
+      .type("invalid email");
+
+    cy.get("form").submit();
+
+    cy
+     .get('input[name="email"]')
+     .parent()
+     .get('.invalid-feedback')
+     .should('contain.text', 'Die E-Mail-Adresse muss ein @-Zeichen enthalten. In der Angabe "invalidemail" fehlt ein @-Zeichen.');
+
+    cy
+      .request("http://127.0.0.1:8000/api/backend/")
+      .then((response) => {
+        expect(response.body.data).to.lengthOf(0);
+       });
+  });
 });
