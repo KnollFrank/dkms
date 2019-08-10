@@ -1,9 +1,9 @@
 from django.test import TestCase
-from .models import Customer
+from .models import Donor
 # from pprint import pprint
 
-def create_customer(id, first_name):
-    return Customer.objects.create(
+def create_donor(id, first_name):
+    return Donor.objects.create(
         id=id,
         first_name=first_name,
         last_name="Customer last_name",
@@ -12,16 +12,16 @@ def create_customer(id, first_name):
         address="Customer 000 Address",
         description= "Customer 001 description")
 
-class CustomerTests(TestCase):
+class DonorTests(TestCase):
 
-    def test_getCustomer(self):
+    def test_getDonor(self):
         # Given
-        customer = create_customer(id=4711, first_name="some first name")
+        donor = create_donor(id=4711, first_name="some first name")
 
         # When
-        response = self.client.get('/api/backend/' + str(customer.id))
+        response = self.client.get('/api/backend/' + str(donor.id))
 
         # Then
         # pprint(response.__dict__)
-        self.assertEquals(response.data['pk'], customer.id)
-        self.assertEquals(response.data['first_name'], customer.first_name)
+        self.assertEquals(response.data['pk'], donor.id)
+        self.assertEquals(response.data['first_name'], donor.first_name)
