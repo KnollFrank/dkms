@@ -2,7 +2,7 @@
 import React from 'react';
 import Form from './Form';
 
-export default class CustomerCreate extends React.Component {
+export default class DonorCreate extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -19,8 +19,8 @@ export default class CustomerCreate extends React.Component {
 
     submit() {
         try {
-          this.props.createCustomer(this.state);
-          alert("Customer created!");
+          this.props.createDonor(this.state);
+          alert("Donor created!");
         } catch(err) {
           alert('There was an error! Please re-check your form.');
         }

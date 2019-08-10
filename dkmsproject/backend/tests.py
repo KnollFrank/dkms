@@ -6,11 +6,11 @@ def create_donor(id, first_name):
     return Donor.objects.create(
         id=id,
         first_name=first_name,
-        last_name="Customer last_name",
-        email="customer001@email.com",
+        last_name="Donor last_name",
+        email="donor001@email.com",
         phone="00000000",
-        address="Customer 000 Address",
-        description= "Customer 001 description")
+        address="Donor 000 Address",
+        description= "Donor 001 description")
 
 class DonorTests(TestCase):
 
