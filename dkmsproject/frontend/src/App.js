@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import CustomerCreate  from './CustomerCreate'
+import DonorCreate  from './DonorCreate'
 import DonorsService from './DonorsService';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <CustomerCreate createCustomer={new DonorsService().createDonor}/>
+      <DonorCreate createDonor={new DonorsService().createDonor}/>
     );
   }
 }
