@@ -25,3 +25,8 @@ class DonorTests(TestCase):
         # pprint(response.__dict__)
         self.assertEquals(response.data['pk'], donor.id)
         self.assertEquals(response.data['first_name'], donor.first_name)
+        self.assertEquals(response.data['last_name'], donor.last_name)
+        self.assertEquals(response.data['email'], donor.email)
+        self.assertEquals(response.data['phone'], donor.phone)
+        self.assertEquals(response.data['address'], donor.address)
+        self.assertEquals(response.data['description'], donor.description)
