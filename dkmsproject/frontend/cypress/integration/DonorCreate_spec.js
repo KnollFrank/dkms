@@ -1,14 +1,14 @@
-describe("CustomerCreate web form", () => {
+describe("DonorCreate web form", () => {
   beforeEach(() => {
     cy.exec("npm run flush");
   });
 
-  it("should create a customer using a web form", () => {
+  it("should create a donor using a web form", () => {
     // Given a web form
     cy.visit("/");
 
-    // And a customer
-    const customer = {
+    // And a donor
+    const donor = {
       first_name: 'some first_name',
       last_name: 'some last_name',
       email: 'email@web.de',
@@ -18,53 +18,53 @@ describe("CustomerCreate web form", () => {
     };
 
     // cy.pause()
-    // When entering a customer into the web form
+    // When entering a donor into the web form
     cy
       .get('input[name="first_name"]')
-      .type(customer.first_name)
-      .should("have.value", customer.first_name);
+      .type(donor.first_name)
+      .should("have.value", donor.first_name);
 
     cy
       .get('input[name="last_name"]')
-      .type(customer.last_name)
-      .should("have.value", customer.last_name);
+      .type(donor.last_name)
+      .should("have.value", donor.last_name);
 
     cy
       .get('input[name="email"]')
-      .type(customer.email)
-      .should("have.value", customer.email);
+      .type(donor.email)
+      .should("have.value", donor.email);
 
     cy
       .get('input[name="phone"]')
-      .type(customer.phone)
-      .should("have.value", customer.phone);
+      .type(donor.phone)
+      .should("have.value", donor.phone);
 
     cy
       .get('input[name="address"]')
-      .type(customer.address)
-      .should("have.value", customer.address);
+      .type(donor.address)
+      .should("have.value", donor.address);
 
     cy
       .get('textarea[name="description"]')
-      .type(customer.description)
-      .should("have.value", customer.description);
+      .type(donor.description)
+      .should("have.value", donor.description);
 
     // And submitting the web form
     cy.get("form").submit();
 
-    // Then the entered customer has been saved to the database
+    // Then the entered donor has been saved to the database
     cy
       .request("http://127.0.0.1:8000/api/backend/")
       .then((response) => {
         // see https://www.chaijs.com/api/bdd/#method_lengthof
         expect(response.body.data).to.lengthOf(1);
-        const customer_actual = response.body.data[0];
-        expect(customer_actual).to.have.property('first_name', customer.first_name)
-        expect(customer_actual).to.have.property('last_name', customer.last_name)
-        expect(customer_actual).to.have.property('email', customer.email)
-        expect(customer_actual).to.have.property('phone', customer.phone)
-        expect(customer_actual).to.have.property('address', customer.address)
-        expect(customer_actual).to.have.property('description', customer.description)
+        const donor_actual = response.body.data[0];
+        expect(donor_actual).to.have.property('first_name', donor.first_name)
+        expect(donor_actual).to.have.property('last_name', donor.last_name)
+        expect(donor_actual).to.have.property('email', donor.email)
+        expect(donor_actual).to.have.property('phone', donor.phone)
+        expect(donor_actual).to.have.property('address', donor.address)
+        expect(donor_actual).to.have.property('description', donor.description)
        });
   });
 
