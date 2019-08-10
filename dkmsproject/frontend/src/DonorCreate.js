@@ -6,6 +6,7 @@ export default class DonorCreate extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
+        salutation: '',
         first_name: '',
         last_name: '',
         email: '',
@@ -43,6 +44,33 @@ export default class DonorCreate extends React.Component {
               <div className={"card-body"}>
                 <Form submit={this.submit}>
                   <div className="form-group">
+                    <ul>
+                      <li>
+                        <label>
+                          <input
+                            name="salutation"
+                            type="radio"
+                            value="Mr"
+                            checked={this.state.salutation === "Mr"}
+                            onChange={this.handleUserInput}
+                          />
+                          Mr
+                        </label>
+                      </li>
+
+                      <li>
+                        <label>
+                          <input
+                            name="salutation"
+                            type="radio"
+                            value="Mrs"
+                            checked={this.state.salutation === "Mrs"}
+                            onChange={this.handleUserInput}
+                          />
+                          Mrs
+                        </label>
+                      </li>
+                    </ul>
                     <label htmlFor='first_name'>First Name:</label>
                     <input
                       className="form-control"

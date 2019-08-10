@@ -33,6 +33,7 @@ describe('DonorCreate', () => {
 
     // Given
     const donor = {
+      salutation: 'Mrs'
       first_name: 'some first_name',
       last_name: 'some last_name',
       email: 'email@web.de',
@@ -42,6 +43,7 @@ describe('DonorCreate', () => {
     };
 
     // When entering a donor
+    enter('input[name="salutation"]', donor.salutation);
     enter('input[name="first_name"]', donor.first_name);
     enter('input[name="last_name"]', donor.last_name);
     enter('input[name="email"]', donor.email);

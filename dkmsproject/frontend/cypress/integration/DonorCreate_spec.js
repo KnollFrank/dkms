@@ -9,6 +9,7 @@ describe("DonorCreate web form", () => {
 
     // And a donor
     const donor = {
+      salutation: 'Mrs',
       first_name: 'some first_name',
       last_name: 'some last_name',
       email: 'email@web.de',
@@ -19,6 +20,11 @@ describe("DonorCreate web form", () => {
 
     // cy.pause()
     // When entering a donor into the web form
+    cy
+      .get('[type="radio"]')
+      .check(donor.salutation)
+      .should('be.checked');
+
     cy
       .get('input[name="first_name"]')
       .type(donor.first_name)
@@ -59,6 +65,7 @@ describe("DonorCreate web form", () => {
         // see https://www.chaijs.com/api/bdd/#method_lengthof
         expect(response.body.data).to.lengthOf(1);
         const donor_actual = response.body.data[0];
+        expect(donor_actual).to.have.property('salutation', donor.salutation)
         expect(donor_actual).to.have.property('first_name', donor.first_name)
         expect(donor_actual).to.have.property('last_name', donor.last_name)
         expect(donor_actual).to.have.property('email', donor.email)
