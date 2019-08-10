@@ -2,37 +2,37 @@
 import React from 'react';
 import expect from 'expect';
 import { mount } from 'enzyme';
-import CustomerCreate from '../CustomerCreate.js';
+import DonorCreate from '../DonorCreate.js';
 
 window.alert = jest.fn();
 
-describe('CustomerCreate', () => {
+describe('DonorCreate', () => {
   window.alert.mockClear();
-  let customerCreate;
-  let createCustomer;
+  let donorCreate;
+  let createDonor;
 
   beforeEach(() => {
-    createCustomer = jest.fn();
-    customerCreate = mount(<CustomerCreate createCustomer={createCustomer} />);
+    createDonor = jest.fn();
+    donorCreate = mount(<DonorCreate createDonor={createDonor} />);
   });
 
-  it('CustomerCreate requires createCustomer prop', () => {
-    expect(customerCreate.props().createCustomer).toBeDefined();
+  it('DonorCreate requires createDonor prop', () => {
+    expect(donorCreate.props().createDonor).toBeDefined();
   });
 
-  it('CustomerCreate renders button', () => {
-    const button = customerCreate.find('button').first();
+  it('DonorCreate renders button', () => {
+    const button = donorCreate.find('button').first();
     expect(button).toBeDefined();
   });
 
-  it.skip('Button click calls createCustomer', () => {
+  it.skip('Button click calls createDonor', () => {
     function enter(selector, text) {
-      const input = customerCreate.find(selector).first();
+      const input = donorCreate.find(selector).first();
       input.simulate('change', { target: { value: text } });
     }
 
     // Given
-    const customer = {
+    const donor = {
       first_name: 'some first_name',
       last_name: 'some last_name',
       email: 'email@web.de',
@@ -41,19 +41,19 @@ describe('CustomerCreate', () => {
       description: 'some description'
     };
 
-    // When entering a customer
-    enter('input[name="first_name"]', customer.first_name);
-    enter('input[name="last_name"]', customer.last_name);
-    enter('input[name="email"]', customer.email);
-    enter('input[name="phone"]', customer.phone);
-    enter('input[name="address"]', customer.address);
-    enter('textarea[name="description"]', customer.description);
+    // When entering a donor
+    enter('input[name="first_name"]', donor.first_name);
+    enter('input[name="last_name"]', donor.last_name);
+    enter('input[name="email"]', donor.email);
+    enter('input[name="phone"]', donor.phone);
+    enter('input[name="address"]', donor.address);
+    enter('textarea[name="description"]', donor.description);
 
     // And clicking the send button
-    const button = customerCreate.find('[type="submit"]').first();
+    const button = donorCreate.find('[type="submit"]').first();
     button.simulate('click');
 
     // Then
-    expect(createCustomer).toBeCalledWith(customer);
+    expect(createDonor).toBeCalledWith(donor);
   });
 });
