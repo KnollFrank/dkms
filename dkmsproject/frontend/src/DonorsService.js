@@ -3,8 +3,8 @@ const API_URL = 'http://localhost:8000';
 
 export default class DonorsService {
 
-    createCustomer(customer){
+    createDonor(donor){
         const url = `${API_URL}/api/backend/`;
-        return axios.post(url, customer);
+        return axios.post(url, donor);
     }
 }

@@ -6,7 +6,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <CustomerCreate createCustomer={new DonorsService().createCustomer}/>
+      <CustomerCreate createCustomer={new DonorsService().createDonor}/>
     );
   }
 }
