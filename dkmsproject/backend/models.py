@@ -7,10 +7,33 @@ class Donor(models.Model):
         (MR, 'Mr.'),
         (MRS, 'Mrs.')
     ]
+
+    DR = "DR"
+    DR_MED = "DR_MED"
+    DR_MED_DENT = "DR_MED_DENT"
+    DR_PHARM = "DR_PHARM"
+    DR_RER_HUM = "DR_RER_HUM"
+    PROF = "PROF"
+    PROF_DR = "PROF_DR"
+    TITLE_CHOICES = [
+        (DR, "Dr."),
+        (DR_MED, "Dr. med."),
+        (DR_MED_DENT, "Dr. med. dent."),
+        (DR_PHARM, "Dr. pharm."),
+        (DR_RER_HUM, "Dr. rer. hum."),
+        (PROF, "Prof."),
+        (PROF_DR, "Prof. Dr."),
+    ]
+
     salutation = models.CharField(
         max_length=3,
         choices=SALUTATION_CHOICES,
         default=MR,
+    )
+    title = models.CharField(
+        max_length=15,
+        choices=TITLE_CHOICES,
+        default=DR,
     )
     first_name = models.CharField("First name", max_length=255)
     last_name = models.CharField("Last name", max_length=255)

@@ -6,6 +6,7 @@ def create_donor(id, first_name):
     return Donor.objects.create(
         id=id,
         salutation=Donor.MR,
+        title=Donor.PROF_DR,
         first_name=first_name,
         last_name="Donor last_name",
         email="donor001@email.com",
@@ -26,6 +27,7 @@ class DonorTests(TestCase):
         # pprint(response.__dict__)
         self.assertEquals(response.data['pk'], donor.id)
         self.assertEquals(response.data['salutation'], donor.salutation)
+        self.assertEquals(response.data['title'], donor.title)
         self.assertEquals(response.data['first_name'], donor.first_name)
         self.assertEquals(response.data['last_name'], donor.last_name)
         self.assertEquals(response.data['email'], donor.email)
