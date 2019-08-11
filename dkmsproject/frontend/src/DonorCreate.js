@@ -45,6 +45,7 @@ export default class DonorCreate extends React.Component {
               <div className={"card-body"}>
                 <Form submit={this.submit}>
                   <div className="form-group">
+                    <label htmlFor='salutation'>Salutation:</label>
                     <div className="form-check">
                       <label>
                         <input
