@@ -11,6 +11,7 @@ class DonorSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'email',
+            'mobile',
             'phone',
             'address',
             'description')

@@ -10,6 +10,7 @@ def create_donor(id, first_name):
         first_name=first_name,
         last_name="Donor last_name",
         email="donor001@email.com",
+        mobile="07471/3807",
         phone="00000000",
         address="Donor 000 Address",
         description= "Donor 001 description")
@@ -31,6 +32,7 @@ class DonorTests(TestCase):
         self.assertEquals(response.data['first_name'], donor.first_name)
         self.assertEquals(response.data['last_name'], donor.last_name)
         self.assertEquals(response.data['email'], donor.email)
+        self.assertEquals(response.data['mobile'], donor.mobile)
         self.assertEquals(response.data['phone'], donor.phone)
         self.assertEquals(response.data['address'], donor.address)
         self.assertEquals(response.data['description'], donor.description)
