@@ -17,7 +17,8 @@ describe("DonorCreate web form", () => {
       mobile: "07471/3807",
       phone: '12345',
       address: 'some address',
-      description: 'some description'
+      description: 'some description',
+      ancestry: 'DE'
     };
 
     // cy.pause()
@@ -28,9 +29,15 @@ describe("DonorCreate web form", () => {
       .should('be.checked');
 
     cy
-      .get('select')
-        .select(donor.title)
-        .should('have.value', donor.title)
+      .get('[name="title"]')
+      .select(donor.title)
+      .should('have.value', donor.title)
+
+    cy
+      .get('[name="ancestry"]')
+      .select(donor.ancestry)
+      .should('have.value', donor.ancestry)
+
     cy
       .get('input[name="first_name"]')
       .type(donor.first_name)
@@ -51,10 +58,10 @@ describe("DonorCreate web form", () => {
       .type(donor.mobile)
       .should("have.value", donor.mobile);
 
-      cy
-        .get('input[name="phone"]')
-        .type(donor.phone)
-        .should("have.value", donor.phone);
+    cy
+      .get('input[name="phone"]')
+      .type(donor.phone)
+      .should("have.value", donor.phone);
 
     cy
       .get('input[name="address"]')
@@ -85,6 +92,7 @@ describe("DonorCreate web form", () => {
         expect(donor_actual).to.have.property('mobile', donor.mobile)
         expect(donor_actual).to.have.property('address', donor.address)
         expect(donor_actual).to.have.property('description', donor.description)
+        expect(donor_actual).to.have.property('ancestry', donor.ancestry)
        });
   });
 

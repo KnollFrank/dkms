@@ -13,7 +13,8 @@ def create_donor(id, first_name):
         mobile="07471/3807",
         phone="00000000",
         address="Donor 000 Address",
-        description= "Donor 001 description")
+        description= "Donor 001 description",
+        ancestry="WS")
 
 class DonorTests(TestCase):
 
@@ -36,3 +37,4 @@ class DonorTests(TestCase):
         self.assertEquals(response.data['phone'], donor.phone)
         self.assertEquals(response.data['address'], donor.address)
         self.assertEquals(response.data['description'], donor.description)
+        self.assertEquals(response.data['ancestry'], donor.ancestry)
