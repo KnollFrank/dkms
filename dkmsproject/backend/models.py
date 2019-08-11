@@ -298,6 +298,7 @@ class Donor(models.Model):
     phone = models.CharField(max_length=20)
     address =  models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
+    dataprotectionprivacy = models.BooleanField(default=True)
     createdAt = models.DateTimeField("Created At", auto_now_add=True)
 
     def __str__(self):

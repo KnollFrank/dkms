@@ -15,4 +15,5 @@ class DonorSerializer(serializers.ModelSerializer):
             'phone',
             'address',
             'description',
-            'ancestry')
+            'ancestry',
+            'dataprotectionprivacy')
