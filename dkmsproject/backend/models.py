@@ -323,7 +323,7 @@ class Donor(models.Model):
 # + email
 #
 # Additional Information:
-# - ancestry
+# + ancestry
 #
 # Declaration of Consent:
 # - dataprotectionprivacy
