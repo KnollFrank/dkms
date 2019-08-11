@@ -14,6 +14,7 @@ describe("DonorCreate web form", () => {
       first_name: 'some first_name',
       last_name: 'some last_name',
       email: 'email@web.de',
+      mobile: "07471/3807",
       phone: '12345',
       address: 'some address',
       description: 'some description'
@@ -46,9 +47,14 @@ describe("DonorCreate web form", () => {
       .should("have.value", donor.email);
 
     cy
-      .get('input[name="phone"]')
-      .type(donor.phone)
-      .should("have.value", donor.phone);
+      .get('input[name="mobile"]')
+      .type(donor.mobile)
+      .should("have.value", donor.mobile);
+
+      cy
+        .get('input[name="phone"]')
+        .type(donor.phone)
+        .should("have.value", donor.phone);
 
     cy
       .get('input[name="address"]')
@@ -76,6 +82,7 @@ describe("DonorCreate web form", () => {
         expect(donor_actual).to.have.property('last_name', donor.last_name)
         expect(donor_actual).to.have.property('email', donor.email)
         expect(donor_actual).to.have.property('phone', donor.phone)
+        expect(donor_actual).to.have.property('mobile', donor.mobile)
         expect(donor_actual).to.have.property('address', donor.address)
         expect(donor_actual).to.have.property('description', donor.description)
        });

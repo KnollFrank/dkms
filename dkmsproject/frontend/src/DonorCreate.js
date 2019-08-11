@@ -138,6 +138,19 @@ export default class DonorCreate extends React.Component {
                   </div>
 
                   <div className="form-group">
+                    <label htmlFor='phone'>Mobile:</label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="mobile"
+                      value={this.state.mobile}
+                      onChange={this.handleUserInput}
+                    />
+                    <small className="form-text text-muted">Must be at least 6 characters long, contain letters and numbers</small>
+                    <div className="invalid-feedback" />
+                  </div>
+
+                  <div className="form-group">
                     <label htmlFor='address'>Address:</label>
                     <input
                       className="form-control"

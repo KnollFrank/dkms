@@ -38,6 +38,7 @@ describe('DonorCreate', () => {
       last_name: 'some last_name',
       email: 'email@web.de',
       phone: '12345',
+      mobile: '07129/922825',
       address: 'some address',
       description: 'some description'
     };
@@ -48,6 +49,7 @@ describe('DonorCreate', () => {
     enter('input[name="last_name"]', donor.last_name);
     enter('input[name="email"]', donor.email);
     enter('input[name="phone"]', donor.phone);
+    enter('input[name="mobile]', donor.mobile);
     enter('input[name="address"]', donor.address);
     enter('textarea[name="description"]', donor.description);
 
