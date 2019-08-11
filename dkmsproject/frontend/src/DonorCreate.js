@@ -15,6 +15,7 @@ export default class DonorCreate extends React.Component {
         address: '',
         description: '',
         ancestry: '',
+        dataprotectionprivacy: false
       };
       this.submit = this.submit.bind(this);
       this.handleUserInput = this.handleUserInput.bind(this);
@@ -29,11 +30,13 @@ export default class DonorCreate extends React.Component {
         }
     }
 
-    handleUserInput(e) {
-      const name = e.target.name;
-      const value = e.target.value;
-      this.setState({[name]: value});
-    }
+    handleUserInput(event) {
+      const target = event.target;
+      const name = target.name;
+      const value = target.type === 'checkbox' ? target.checked : target.value;
+
+      this.setState({[name]: value });
+  }
 
     render() {
       return (
@@ -428,6 +431,17 @@ export default class DonorCreate extends React.Component {
                       onChange={this.handleUserInput}
                     />
                     <div className="invalid-feedback" />
+                  </div>
+
+                  <div className="form-group">
+                    <label>
+                      Declaration of Consent:
+                      <input
+                        name="dataprotectionprivacy"
+                        type="checkbox"
+                        checked={this.state.dataprotectionprivacy}
+                        onChange={this.handleUserInput} />
+                    </label>
                   </div>
 
                   <div className={"row justify-content-md-center"}>

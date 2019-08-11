@@ -18,7 +18,9 @@ describe("DonorCreate web form", () => {
       phone: '12345',
       address: 'some address',
       description: 'some description',
-      ancestry: 'DE'
+      ancestry: 'DE',
+      // TODO: additionally test "dataprotectionprivacy: false"
+      dataprotectionprivacy: true
     };
 
     // cy.pause()
@@ -73,6 +75,17 @@ describe("DonorCreate web form", () => {
       .type(donor.description)
       .should("have.value", donor.description);
 
+    let checkbox = cy.get('[type="checkbox"]')
+    if(donor.dataprotectionprivacy) {
+        checkbox
+          .check()
+          .should('be.checked')
+    } else {
+      checkbox
+        .uncheck()
+        .should('not.be.checked')
+    }
+
     // And submitting the web form
     cy.get("form").submit();
 
@@ -93,6 +106,7 @@ describe("DonorCreate web form", () => {
         expect(donor_actual).to.have.property('address', donor.address)
         expect(donor_actual).to.have.property('description', donor.description)
         expect(donor_actual).to.have.property('ancestry', donor.ancestry)
+        expect(donor_actual).to.have.property('dataprotectionprivacy', donor.dataprotectionprivacy)
        });
   });
 
