@@ -7,6 +7,7 @@ export default class DonorCreate extends React.Component {
       super(props);
       this.state = {
         salutation: '',
+        title: '',
         first_name: '',
         last_name: '',
         email: '',
@@ -69,6 +70,20 @@ export default class DonorCreate extends React.Component {
                         Mrs
                       </label>
                     </div>
+                  </div>
+
+                  <div className="form-group">
+                    <select name="title"
+                            value={this.state.title}
+                            onChange={this.handleUserInput}>
+                      <option value="DR">Dr.</option>
+                      <option value="DR_MED">Dr. med.</option>
+                      <option value="DR_MED_DENT">Dr. med. dent.</option>
+                      <option value="DR_PHARM">Dr. pharm.</option>
+                      <option value="DR_RER_HUM">Dr. rer. hum.</option>
+                      <option value="PROF">Prof.</option>
+                      <option value="PROF_DR">Prof. Dr.</option>
+                    </select>
                   </div>
 
                   <div className="form-group">

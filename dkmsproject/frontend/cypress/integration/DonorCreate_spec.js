@@ -10,6 +10,7 @@ describe("DonorCreate web form", () => {
     // And a donor
     const donor = {
       salutation: 'Mrs',
+      title: 'DR_MED_DENT',
       first_name: 'some first_name',
       last_name: 'some last_name',
       email: 'email@web.de',
@@ -25,6 +26,10 @@ describe("DonorCreate web form", () => {
       .check(donor.salutation)
       .should('be.checked');
 
+    cy
+      .get('select')
+        .select(donor.title)
+        .should('have.value', donor.title)
     cy
       .get('input[name="first_name"]')
       .type(donor.first_name)
@@ -66,6 +71,7 @@ describe("DonorCreate web form", () => {
         expect(response.body.data).to.lengthOf(1);
         const donor_actual = response.body.data[0];
         expect(donor_actual).to.have.property('salutation', donor.salutation)
+        expect(donor_actual).to.have.property('title', donor.title)
         expect(donor_actual).to.have.property('first_name', donor.first_name)
         expect(donor_actual).to.have.property('last_name', donor.last_name)
         expect(donor_actual).to.have.property('email', donor.email)
