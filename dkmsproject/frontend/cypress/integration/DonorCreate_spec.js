@@ -5,7 +5,6 @@ describe("DonorCreate web form", () => {
 
   function createSomeDonor() {
     return {
-      // TODO: select Mr and Mrs in two different tests
       salutation: 'Mrs',
       title: 'DR_MED_DENT',
       first_name: 'some first_name',
@@ -32,13 +31,29 @@ describe("DonorCreate web form", () => {
           let donor = createSomeDonor();
           donor.dataprotectionprivacy = true;
           return donor;})(),
-        desc: 'dataprotectionprivacy = true'},
+        desc: 'dataprotectionprivacy = true'
+      },
       {
         donor: (() => {
           let donor = createSomeDonor();
           donor.dataprotectionprivacy = false;
           return donor;})(),
-        desc: 'dataprotectionprivacy = false'},
+        desc: 'dataprotectionprivacy = false'
+      },
+      {
+        donor: (() => {
+          let donor = createSomeDonor();
+          donor.salutation = 'Mrs';
+          return donor;})(),
+        desc: "salutation = Mrs"
+      },
+      {
+        donor: (() => {
+          let donor = createSomeDonor();
+          donor.salutation = 'Mr';
+          return donor;})(),
+        desc: "salutation = Mr"
+      },
     ];
 
   tests.forEach(function(test) {
