@@ -68,6 +68,4 @@ def donor_detail(request, pk):
 
 @api_view(['GET'])
 def get_ancestry_choices(request):
-    return Response({
-    "DE": 'Germany',
-    'TR': 'Turkey'})
+    return Response(Donor.ANCESTRY_CHOICES)

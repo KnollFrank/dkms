@@ -1,6 +1,6 @@
 from django.test import TestCase
 from .models import Donor
-# from pprint import pprint
+from pprint import pprint
 
 def create_donor(id, first_name):
     return Donor.objects.create(
@@ -60,6 +60,4 @@ class DonorTests(TestCase):
         response = self.client.get('/api/backend/ancestry_choices')
 
         # Then
-        # pprint(response.__dict__)
-        self.assertEquals(response.data['DE'], 'Germany')
-        self.assertEquals(response.data['TR'], 'Turkey')
+        self.assertEquals(response.data, Donor.ANCESTRY_CHOICES)
