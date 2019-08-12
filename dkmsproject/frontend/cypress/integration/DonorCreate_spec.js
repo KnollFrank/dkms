@@ -5,6 +5,7 @@ describe("DonorCreate web form", () => {
 
   function createSomeDonor() {
     return {
+      // TODO: select Mr and Mrs in two different tests
       salutation: 'Mrs',
       title: 'DR_MED_DENT',
       first_name: 'some first_name',
@@ -47,17 +48,21 @@ describe("DonorCreate web form", () => {
       // cy.pause()
       // When entering a donor into the web form
       cy
-        .get('[type="radio"]')
+        .get('[name="salutation"]')
         .check(donor.salutation)
         .should('be.checked');
 
       cy
         .get('[name="title"]')
+        .should('contain', 'Dr.')
+        .should('contain', 'Prof. Dr.')
         .select(donor.title)
         .should('have.value', donor.title)
 
       cy
         .get('[name="ancestry"]')
+        .should('contain', 'Germany')
+        .should('contain', 'Zimbabwe')
         .select(donor.ancestry)
         .should('have.value', donor.ancestry)
 
