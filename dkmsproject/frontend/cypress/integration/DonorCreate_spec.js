@@ -26,15 +26,19 @@ describe("DonorCreate web form", () => {
     };
   }
 
-  let donor1 = createSomeDonor();
-  donor1.dataprotectionprivacy = true;
-
-  let donor2 = createSomeDonor();
-  donor2.dataprotectionprivacy = false;
-
   var tests = [
-      {donor: donor1, desc: 'dataprotectionprivacy = true'},
-      {donor: donor2, desc: 'dataprotectionprivacy = false'},
+      {
+        donor: (() => {
+          let donor = createSomeDonor();
+          donor.dataprotectionprivacy = true;
+          return donor;})(),
+        desc: 'dataprotectionprivacy = true'},
+      {
+        donor: (() => {
+          let donor = createSomeDonor();
+          donor.dataprotectionprivacy = false;
+          return donor;})(),
+        desc: 'dataprotectionprivacy = false'},
     ];
 
   tests.forEach(function(test) {
