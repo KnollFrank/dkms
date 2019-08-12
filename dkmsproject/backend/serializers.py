@@ -18,6 +18,7 @@ class DonorSerializer(serializers.ModelSerializer):
             'city',
             'houseno',
             'zipcode',
+            'co',
             'description',
             'ancestry',
             'dataprotectionprivacy')

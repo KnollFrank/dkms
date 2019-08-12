@@ -302,6 +302,7 @@ class Donor(models.Model):
     # TODO: add validation to zipcode
     zipcode = models.CharField(max_length=20, blank=True)
     houseno =  models.CharField(max_length=255, blank=True, null=True)
+    co = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True, null=True)
     dataprotectionprivacy = models.BooleanField(default=True)
     createdAt = models.DateTimeField("Created At", auto_now_add=True)
@@ -319,7 +320,7 @@ class Donor(models.Model):
 # + street
 # + houseno
 # - apartment (optional)
-# - co (optional)
+# + co (optional)
 # + zipcode
 # + city
 #
