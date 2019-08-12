@@ -17,6 +17,7 @@ describe("DonorCreate web form", () => {
       mobile: "07471/3807",
       phone: '12345',
       address: 'some address',
+      street: 'some street',
       description: 'some description',
       ancestry: 'DE',
       // TODO: additionally test "dataprotectionprivacy: false"
@@ -71,6 +72,11 @@ describe("DonorCreate web form", () => {
       .should("have.value", donor.address);
 
     cy
+      .get('input[name="street"]')
+      .type(donor.street)
+      .should("have.value", donor.street);
+
+    cy
       .get('textarea[name="description"]')
       .type(donor.description)
       .should("have.value", donor.description);
@@ -104,6 +110,7 @@ describe("DonorCreate web form", () => {
         expect(donor_actual).to.have.property('phone', donor.phone)
         expect(donor_actual).to.have.property('mobile', donor.mobile)
         expect(donor_actual).to.have.property('address', donor.address)
+        expect(donor_actual).to.have.property('street', donor.street)
         expect(donor_actual).to.have.property('description', donor.description)
         expect(donor_actual).to.have.property('ancestry', donor.ancestry)
         expect(donor_actual).to.have.property('dataprotectionprivacy', donor.dataprotectionprivacy)

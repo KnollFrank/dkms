@@ -2,6 +2,7 @@
 import React from 'react';
 import Form from './Form';
 
+// TODO: load options for ancestry from model donor via REST
 export default class DonorCreate extends React.Component {
     constructor(props) {
       super(props);
@@ -13,6 +14,7 @@ export default class DonorCreate extends React.Component {
         email: '',
         phone: '',
         address: '',
+        street: '',
         description: '',
         ancestry: '',
         dataprotectionprivacy: false
@@ -417,6 +419,18 @@ export default class DonorCreate extends React.Component {
                       type="text"
                       name="address"
                       value={this.state.address}
+                      onChange={this.handleUserInput}
+                    />
+                    <div className="invalid-feedback" />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor='street'>Street:</label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="street"
+                      value={this.state.street}
                       onChange={this.handleUserInput}
                     />
                     <div className="invalid-feedback" />

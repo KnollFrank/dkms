@@ -13,6 +13,7 @@ def create_donor(id, first_name):
         mobile="07471/3807",
         phone="00000000",
         address="Donor 000 Address",
+        street="ingersheimer Str.",
         description= "Donor 001 description",
         ancestry="WS",
         dataprotectionprivacy=True)
@@ -37,6 +38,7 @@ class DonorTests(TestCase):
         self.assertEquals(response.data['mobile'], donor.mobile)
         self.assertEquals(response.data['phone'], donor.phone)
         self.assertEquals(response.data['address'], donor.address)
+        self.assertEquals(response.data['street'], donor.street)
         self.assertEquals(response.data['description'], donor.description)
         self.assertEquals(response.data['ancestry'], donor.ancestry)
         self.assertEquals(response.data['dataprotectionprivacy'], donor.dataprotectionprivacy)
