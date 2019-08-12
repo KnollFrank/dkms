@@ -299,6 +299,8 @@ class Donor(models.Model):
     address =  models.TextField(blank=True, null=True)
     street =  models.CharField(max_length=255, blank=True, null=True)
     city =  models.CharField(max_length=255, blank=True, null=True)
+    # TODO: add validation to zipcode
+    zipcode = models.CharField(max_length=20, blank=True)
     houseno =  models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     dataprotectionprivacy = models.BooleanField(default=True)
@@ -318,7 +320,7 @@ class Donor(models.Model):
 # + houseno
 # - apartment (optional)
 # - co (optional)
-# - zipcode
+# + zipcode
 # + city
 #
 # Contact details:
