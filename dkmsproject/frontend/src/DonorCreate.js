@@ -3,6 +3,7 @@ import React from 'react';
 import Form from './Form';
 
 // TODO: load options for ancestry from model donor via REST
+// TODO: this form should look exactly like the online DKMS web form
 export default class DonorCreate extends React.Component {
     constructor(props) {
       super(props);

@@ -1,5 +1,6 @@
 from django.db import models
 
+# TODO: split into multiple model elements (see web form): Personal information, Private address, Contact details, ...
 class Donor(models.Model):
     MR = 'Mr'
     MRS = 'Mrs'
