@@ -32,7 +32,7 @@ export default class DonorCreate extends React.Component {
 
     componentDidMount() {
       new DonorsService()
-        .get_ancestry_choices()
+        .get_ancestry_choices_promise()
         .then(ancestry_choices => {
           this.setState({ ancestry_choices: ancestry_choices });
         });

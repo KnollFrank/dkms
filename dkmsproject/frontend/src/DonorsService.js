@@ -8,7 +8,7 @@ export default class DonorsService {
         return axios.post(url, donor);
     }
 
-    get_ancestry_choices() {
+    get_ancestry_choices_promise() {
       const url = `${API_URL}/api/backend/ancestry_choices`;
       return axios
         .get(url)
