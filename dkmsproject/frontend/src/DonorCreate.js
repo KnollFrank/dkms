@@ -16,6 +16,7 @@ export default class DonorCreate extends React.Component {
         address: '',
         street: '',
         city: '',
+        houseno: '',
         description: '',
         ancestry: '',
         dataprotectionprivacy: false
@@ -444,6 +445,18 @@ export default class DonorCreate extends React.Component {
                       type="text"
                       name="city"
                       value={this.state.city}
+                      onChange={this.handleUserInput}
+                    />
+                    <div className="invalid-feedback" />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor='houseno'>House number:</label>
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="houseno"
+                      value={this.state.houseno}
                       onChange={this.handleUserInput}
                     />
                     <div className="invalid-feedback" />

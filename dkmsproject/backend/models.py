@@ -299,6 +299,7 @@ class Donor(models.Model):
     address =  models.TextField(blank=True, null=True)
     street =  models.CharField(max_length=255, blank=True, null=True)
     city =  models.CharField(max_length=255, blank=True, null=True)
+    houseno =  models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     dataprotectionprivacy = models.BooleanField(default=True)
     createdAt = models.DateTimeField("Created At", auto_now_add=True)
@@ -314,7 +315,7 @@ class Donor(models.Model):
 #
 # Private address:
 # + street
-# - houseno
+# + houseno
 # - apartment (optional)
 # - co (optional)
 # - zipcode
