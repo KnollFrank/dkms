@@ -52,3 +52,14 @@ class DonorTests(TestCase):
         self.assertEquals(response.data['description'], donor.description)
         self.assertEquals(response.data['ancestry'], donor.ancestry)
         self.assertEquals(response.data['dataprotectionprivacy'], donor.dataprotectionprivacy)
+
+    def test_get_ancestry_choices(self):
+        # Given
+
+        # When
+        response = self.client.get('/api/backend/ancestry_choices')
+
+        # Then
+        # pprint(response.__dict__)
+        self.assertEquals(response.data['DE'], 'Germany')
+        self.assertEquals(response.data['TR'], 'Turkey')

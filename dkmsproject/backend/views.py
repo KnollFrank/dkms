@@ -25,7 +25,7 @@ def donors_list(request):
         except EmptyPage:
             data = paginator.page(paginator.num_pages)
 
-        serializer = DonorSerializer(data,context={'request': request} ,many=True)
+        serializer = DonorSerializer(data, context={'request': request}, many=True)
         if data.has_next():
             nextPage = data.next_page_number()
         if data.has_previous():
@@ -64,3 +64,10 @@ def donor_detail(request, pk):
     elif request.method == 'DELETE':
         donor.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET'])
+def get_ancestry_choices(request):
+    return Response({
+    "DE": 'Germany',
+    'TR': 'Turkey'})

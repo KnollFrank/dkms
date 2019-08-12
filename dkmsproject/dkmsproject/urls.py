@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^api/backend/$', views.donors_list),
     url(r'^api/backend/(?P<pk>[0-9]+)$', views.donor_detail),
+    url(r'^api/backend/ancestry_choices$', views.get_ancestry_choices),
 ]
