@@ -1,6 +1,7 @@
 from django.db import models
 
 # TODO: split into multiple model elements (see web form): Personal information, Private address, Contact details, ...
+# TODO: some fields shall be nullable, some not, see the online DKMS web form for reference 
 class Donor(models.Model):
     MR = 'Mr'
     MRS = 'Mrs'
