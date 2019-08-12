@@ -3,59 +3,46 @@ describe("DonorCreate web form", () => {
     cy.exec("npm run flush");
   });
 
-  const donor1 = {
-    salutation: 'Mrs',
-    title: 'DR_MED_DENT',
-    first_name: 'some first_name',
-    last_name: 'some last_name',
-    email: 'email@web.de',
-    mobile: "07471/3807",
-    phone: '12345',
-    address: 'some address',
-    street: 'some street',
-    city: 'some city',
-    houseno: '4711',
-    zipcode: '0815',
-    co: 'some co',
-    apartment: 'some apartment',
-    description: 'some description',
-    ancestry: 'DE',
-    dataprotectionprivacy: true
-  };
+  function createSomeDonor() {
+    return {
+      salutation: 'Mrs',
+      title: 'DR_MED_DENT',
+      first_name: 'some first_name',
+      last_name: 'some last_name',
+      email: 'email@web.de',
+      mobile: "07471/3807",
+      phone: '12345',
+      address: 'some address',
+      street: 'some street',
+      city: 'some city',
+      houseno: '4711',
+      zipcode: '0815',
+      co: 'some co',
+      apartment: 'some apartment',
+      description: 'some description',
+      ancestry: 'DE',
+      dataprotectionprivacy: true
+    };
+  }
 
-  const donor2 = {
-    salutation: 'Mrs',
-    title: 'DR_MED_DENT',
-    first_name: 'some first_name',
-    last_name: 'some last_name',
-    email: 'email@web.de',
-    mobile: "07471/3807",
-    phone: '12345',
-    address: 'some address',
-    street: 'some street',
-    city: 'some city',
-    houseno: '4711',
-    zipcode: '0815',
-    co: 'some co',
-    apartment: 'some apartment',
-    description: 'some description',
-    ancestry: 'DE',
-    dataprotectionprivacy: false
-  };
+  let donor1 = createSomeDonor();
+  donor1.dataprotectionprivacy = true;
+
+  let donor2 = createSomeDonor();
+  donor2.dataprotectionprivacy = false;
 
   var tests = [
-      {donor: donor1},
-      {donor: donor2},
+      {donor: donor1, desc: 'dataprotectionprivacy = true'},
+      {donor: donor2, desc: 'dataprotectionprivacy = false'},
     ];
 
   tests.forEach(function(test) {
-    it("should create a donor using a web form", () => {
-      const donor = test.donor
-
+    it("should create a donor having " + test.desc + " using a web form", () => {
       // Given a web form
       cy.visit("/");
 
       // And a donor
+      const donor = test.donor
 
       // cy.pause()
       // When entering a donor into the web form
@@ -139,7 +126,7 @@ describe("DonorCreate web form", () => {
         .type(donor.description)
         .should("have.value", donor.description);
 
-      let checkbox = cy.get('[type="checkbox"]')
+      let checkbox = cy.get('input[name="dataprotectionprivacy"]')
       if(donor.dataprotectionprivacy) {
           checkbox
             .check()
