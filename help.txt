@@ -4,3 +4,6 @@ https://www.valentinog.com/blog/drf/
 use cypress:
 https://www.valentinog.com/blog/drf/
 https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell
+
+running specific test DonorDAOTests:
+(dkms) frankknoll@frankknoll-XPS-13-9370:~/web/dkms/dkmsproject$ ./manage.py test backend.tests.DonorDAOTests

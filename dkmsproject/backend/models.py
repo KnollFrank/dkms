@@ -1,8 +1,6 @@
 from django.db import models
 
-# TODO: split into multiple model elements (see web form): Personal information, Private address, Contact details, ...
-# TODO: some fields shall be nullable, some not, see the online DKMS web form for reference 
-class Donor(models.Model):
+class PersonalInformation(models.Model):
     MR = 'Mr'
     MRS = 'Mrs'
     SALUTATION_CHOICES = [
@@ -27,6 +25,26 @@ class Donor(models.Model):
       (PROF_DR, "Prof. Dr."),
     ]
 
+    salutation = models.CharField(
+        max_length=3,
+        choices=SALUTATION_CHOICES,
+        default=MR,
+    )
+    title = models.CharField(
+        max_length=15,
+        choices=TITLE_CHOICES,
+        default=DR,
+    )
+    first_name = models.CharField("First name", max_length=255)
+    last_name = models.CharField("Last name", max_length=255)
+
+    def __str__(self):
+        return self.first_name
+
+
+# TODO: split into multiple model elements (see web form): Personal information, Private address, Contact details, ...
+# TODO: some fields shall be nullable, some not, see the online DKMS web form for reference
+class Donor(models.Model):
     ANCESTRY_CHOICES = [
       ("**", "No selection"),
       ("DE", "Germany"),
@@ -278,23 +296,16 @@ class Donor(models.Model):
       ("ZW", "Zimbabwe"),
     ]
 
-    salutation = models.CharField(
-        max_length=3,
-        choices=SALUTATION_CHOICES,
-        default=MR,
-    )
-    title = models.CharField(
-        max_length=15,
-        choices=TITLE_CHOICES,
-        default=DR,
+    personal_information = models.OneToOneField(
+        PersonalInformation,
+        on_delete=models.CASCADE,
+        null=True
     )
     ancestry = models.CharField(
         max_length=2,
         choices=ANCESTRY_CHOICES,
         default="CN",
     )
-    first_name = models.CharField("First name", max_length=255)
-    last_name = models.CharField("Last name", max_length=255)
     email = models.EmailField()
     mobile = models.CharField(max_length=20, blank=True)
     phone = models.CharField(max_length=20)
@@ -311,7 +322,7 @@ class Donor(models.Model):
     createdAt = models.DateTimeField("Created At", auto_now_add=True)
 
     def __str__(self):
-        return self.first_name
+        return self.personal_information.first_name
 
 # Personal information:
 # + salutation: Mr. / Mrs.

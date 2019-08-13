@@ -1,14 +1,17 @@
 from django.test import TestCase
-from .models import Donor
+from .models import Donor, PersonalInformation
 from pprint import pprint
 
-def create_donor(id, first_name):
+def create_and_save_donor(id=1, first_name="some first name"):
+    personal_information = PersonalInformation.objects.create(
+            salutation=PersonalInformation.MR,
+            title=PersonalInformation.PROF_DR,
+            first_name=first_name,
+            last_name="Donor last_name")
+
     return Donor.objects.create(
         id=id,
-        salutation=Donor.MR,
-        title=Donor.PROF_DR,
-        first_name=first_name,
-        last_name="Donor last_name",
+        personal_information=personal_information,
         email="donor001@email.com",
         mobile="07471/3807",
         phone="00000000",
@@ -27,13 +30,13 @@ class DonorTests(TestCase):
 
     def test_getDonor(self):
         # Given
-        donor = create_donor(id=4711, first_name="some first name")
+        donor = create_and_save_donor(id=4711, first_name="some first name")
 
         # When
         response = self.client.get('/api/backend/' + str(donor.id))
 
         # Then
-        # pprint(response.__dict__)
+        pprint(response.__dict__)
         self.assertEquals(response.data['pk'], donor.id)
         self.assertEquals(response.data['salutation'], donor.salutation)
         self.assertEquals(response.data['title'], donor.title)
@@ -61,3 +64,19 @@ class DonorTests(TestCase):
 
         # Then
         self.assertEquals(response.data, Donor.ANCESTRY_CHOICES)
+
+
+class DonorDAOTests(TestCase):
+
+    def test_save_and_Get_donor(self):
+        # Given
+        first_name = 'Franky'
+        donor = create_and_save_donor(first_name = first_name)
+
+        # When
+
+        # Then donor was saved to the db
+        self.assertTrue(Donor.objects.filter(pk=donor.pk).exists())
+        # and when loading donor from db again, it's personal_information is also loaded
+        donorFromDb = Donor.objects.get(pk=donor.pk)
+        self.assertEquals(donorFromDb.personal_information.first_name, first_name)
