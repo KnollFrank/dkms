@@ -84,7 +84,7 @@ class DonorTests(TestCase):
 
 class DonorDAOTests(TestCase):
 
-    def test_save_and_Get_donor(self):
+    def test_save_and_get_donor(self):
         # Given a donor
         first_name = 'Frank'
         donor = create_donor(id=1, first_name=first_name)
