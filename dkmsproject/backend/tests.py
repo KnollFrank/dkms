@@ -2,14 +2,14 @@ from django.test import TestCase
 from .models import Donor, PersonalInformation
 from pprint import pprint
 
-def create_and_save_donor(id=1, first_name="some first name"):
-    personal_information = PersonalInformation.objects.create(
+def create_donor(id=1, first_name="some first name"):
+    personal_information = PersonalInformation(
             salutation=PersonalInformation.MR,
             title=PersonalInformation.PROF_DR,
             first_name=first_name,
             last_name="Donor last_name")
 
-    return Donor.objects.create(
+    donor = Donor(
         id=id,
         personal_information=personal_information,
         email="donor001@email.com",
@@ -25,6 +25,15 @@ def create_and_save_donor(id=1, first_name="some first name"):
         description= "Donor 001 description",
         ancestry="WS",
         dataprotectionprivacy=True)
+    return donor
+
+def create_and_save_donor(id=1, first_name="some first name"):
+    donor = create_donor(id, first_name)
+    personal_information = donor.personal_information
+    personal_information.save()
+    donor.personal_information = personal_information
+    donor.save()
+    return donor
 
 class DonorTests(TestCase):
 
