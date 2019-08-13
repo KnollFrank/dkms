@@ -7,3 +7,13 @@ https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell
 
 running specific test DonorDAOTests:
 (dkms) frankknoll@frankknoll-XPS-13-9370:~/web/dkms/dkmsproject$ ./manage.py test backend.tests.DonorDAOTests
+
+start backend:
+frankknoll@frankknoll-XPS-13-9370:~/web/dkms$ source bin/activate
+(dkms) frankknoll@frankknoll-XPS-13-9370:~/web/dkms/dkmsproject$ ./manage.py runserver
+
+start frontend:
+frankknoll@frankknoll-XPS-13-9370:~/web/dkms/dkmsproject/frontend$ npm start
+
+start cypress:
+frankknoll@frankknoll-XPS-13-9370:~/web/dkms/dkmsproject/frontend$ npx cypress open
