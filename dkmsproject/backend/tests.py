@@ -36,12 +36,13 @@ class DonorTests(TestCase):
         response = self.client.get('/api/backend/' + str(donor.id))
 
         # Then
-        pprint(response.__dict__)
+        # pprint(response.__dict__)
         self.assertEquals(response.data['pk'], donor.id)
-        self.assertEquals(response.data['salutation'], donor.salutation)
-        self.assertEquals(response.data['title'], donor.title)
-        self.assertEquals(response.data['first_name'], donor.first_name)
-        self.assertEquals(response.data['last_name'], donor.last_name)
+
+        self.assertEquals_personal_information(
+            actual = response.data['personal_information'],
+            expected = donor.personal_information)
+
         self.assertEquals(response.data['email'], donor.email)
         self.assertEquals(response.data['mobile'], donor.mobile)
         self.assertEquals(response.data['phone'], donor.phone)
@@ -55,6 +56,12 @@ class DonorTests(TestCase):
         self.assertEquals(response.data['description'], donor.description)
         self.assertEquals(response.data['ancestry'], donor.ancestry)
         self.assertEquals(response.data['dataprotectionprivacy'], donor.dataprotectionprivacy)
+
+    def assertEquals_personal_information(self, actual, expected):
+        self.assertEquals(actual['salutation'], expected.salutation)
+        self.assertEquals(actual['title'], expected.title)
+        self.assertEquals(actual['first_name'], expected.first_name)
+        self.assertEquals(actual['last_name'], expected.last_name)
 
     def test_get_ancestry_choices(self):
         # Given

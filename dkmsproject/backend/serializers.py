@@ -1,15 +1,13 @@
 from rest_framework import serializers
-from .models import Donor
+from .models import Donor, PersonalInformation
 
+# MAYBE-TODO: verwende HyperlinkedModelSerializer statt ModelSerializer
 class DonorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Donor
         fields = (
             'pk',
-            'salutation',
-            'title',
-            'first_name',
-            'last_name',
+            'personal_information',
             'email',
             'mobile',
             'phone',
@@ -23,3 +21,14 @@ class DonorSerializer(serializers.ModelSerializer):
             'description',
             'ancestry',
             'dataprotectionprivacy')
+        depth = 1
+
+class PersonalInformationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PersonalInformation
+        fields = (
+            'pk',
+            'salutation',
+            'title',
+            'first_name',
+            'last_name')

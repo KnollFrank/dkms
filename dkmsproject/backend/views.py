@@ -6,6 +6,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Donor
 from .serializers import *
 
+# TODO: use ModelViewSet?
+
 @api_view(['GET', 'POST'])
 def donors_list(request):
     """
@@ -51,11 +53,11 @@ def donor_detail(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
-        serializer = DonorSerializer(donor,context={'request': request})
+        serializer = DonorSerializer(donor, context={'request': request})
         return Response(serializer.data)
 
     elif request.method == 'PUT':
-        serializer = DonorSerializer(donor, data=request.data,context={'request': request})
+        serializer = DonorSerializer(donor, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
