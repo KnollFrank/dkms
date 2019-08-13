@@ -85,11 +85,15 @@ class DonorTests(TestCase):
 class DonorDAOTests(TestCase):
 
     def test_save_and_Get_donor(self):
-        # Given
-        first_name = 'Franky'
-        donor = create_and_save_donor(first_name = first_name)
+        # Given a donor
+        first_name = 'Frank'
+        donor = create_donor(id=1, first_name=first_name)
 
-        # When
+        # When saving the donor
+        personal_information = donor.personal_information
+        personal_information.save()
+        donor.personal_information = personal_information
+        donor.save()
 
         # Then donor was saved to the db
         self.assertTrue(Donor.objects.filter(pk=donor.pk).exists())
