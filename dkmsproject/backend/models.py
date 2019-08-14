@@ -41,6 +41,18 @@ class PersonalInformation(models.Model):
     def __str__(self):
         return self.first_name
 
+class PrivateAddress(models.Model):
+    address =  models.TextField(blank=True, null=True)
+    street =  models.CharField(max_length=255, blank=True, null=True)
+    city =  models.CharField(max_length=255, blank=True, null=True)
+    # TODO: add validation to zipcode
+    zipcode = models.CharField(max_length=20, blank=True)
+    houseno =  models.CharField(max_length=255, blank=True, null=True)
+    co = models.CharField(max_length=255, blank=True)
+    apartment = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.address
 
 # TODO: split into multiple model elements (see web form): Personal information, Private address, Contact details, ...
 # TODO: some fields shall be nullable, some not, see the online DKMS web form for reference
@@ -301,22 +313,23 @@ class Donor(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
+
     ancestry = models.CharField(
         max_length=2,
         choices=ANCESTRY_CHOICES,
         default="CN",
     )
+
     email = models.EmailField()
     mobile = models.CharField(max_length=20, blank=True)
     phone = models.CharField(max_length=20)
-    address =  models.TextField(blank=True, null=True)
-    street =  models.CharField(max_length=255, blank=True, null=True)
-    city =  models.CharField(max_length=255, blank=True, null=True)
-    # TODO: add validation to zipcode
-    zipcode = models.CharField(max_length=20, blank=True)
-    houseno =  models.CharField(max_length=255, blank=True, null=True)
-    co = models.CharField(max_length=255, blank=True)
-    apartment = models.CharField(max_length=255, blank=True)
+
+    private_address = models.OneToOneField(
+        PrivateAddress,
+        on_delete=models.CASCADE,
+        null=True
+    )
+
     description = models.TextField(blank=True, null=True)
     dataprotectionprivacy = models.BooleanField(default=True)
     createdAt = models.DateTimeField("Created At", auto_now_add=True)
