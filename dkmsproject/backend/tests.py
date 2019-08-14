@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Donor, PersonalInformation, PrivateAddress, ContactDetails
+from .models import Donor, PersonalInformation, PrivateAddress, ContactDetails, AdditionalInformation
 from .serializers import DonorSerializer
 from rest_framework.renderers import JSONRenderer
 from pprint import pprint
@@ -26,13 +26,15 @@ def create_donor(id=1, first_name="some first name"):
             mobile="07471/3807",
             phone="00000000")
 
+    additional_information = AdditionalInformation(ancestry="WS")
+
     donor = Donor(
         id=id,
         personal_information=personal_information,
         private_address=private_address,
         contact_details=contact_details,
+        additional_information=additional_information,
         description= "Donor 001 description",
-        ancestry="WS",
         dataprotectionprivacy=True)
     return donor
 
@@ -51,6 +53,10 @@ def create_and_save_donor(id=1, first_name="some first name"):
     contact_details.save()
     donor.contact_details = contact_details
 
+    additional_information = donor.additional_information
+    additional_information.save()
+    donor.additional_information = additional_information
+
     donor.save()
     return donor
 
@@ -61,6 +67,7 @@ class DonorTests(TestCase):
         first_name = 'a some first name'
         address = 'a Donor 000 Address'
         email = 'adonor001@email.com'
+        ancestry = "WS"
         donor = {
           'personal_information': {
                 'salutation':  'Mr',
@@ -75,17 +82,19 @@ class DonorTests(TestCase):
                 'zipcode': '72072',
                 'houseno': '4711',
                 'co': 'a some co',
-                'apartment': 'a some apartment',
+                'apartment': 'a some apartment'
            },
            'contact_details': {
                 'email': email,
                 'mobile': '07471/3807',
-                'phone': '000000006',
+                'phone': '000000006'
            },
-          'ancestry': 'WS',
+           'additional_information': {
+                'ancestry': ancestry
+           },
           'dataprotectionprivacy': True,
           'description': 'a Donor 001 description',
-          'pk': 4712,
+          'pk': 4712
           }
 
         # When
@@ -98,6 +107,7 @@ class DonorTests(TestCase):
         self.assertEquals(donorFromDb.contact_details.email, email)
         self.assertEquals(donorFromDb.personal_information.first_name, first_name)
         self.assertEquals(donorFromDb.private_address.address, address)
+        self.assertEquals(donorFromDb.additional_information.ancestry, ancestry)
 
     def test_getDonor(self):
         # Given
@@ -122,8 +132,11 @@ class DonorTests(TestCase):
             actual = response.data['contact_details'],
             expected = donor.contact_details)
 
+        self.assertEquals_additional_information(
+            actual = response.data['additional_information'],
+            expected = donor.additional_information)
+
         self.assertEquals(response.data['description'], donor.description)
-        self.assertEquals(response.data['ancestry'], donor.ancestry)
         self.assertEquals(response.data['dataprotectionprivacy'], donor.dataprotectionprivacy)
 
     def assertEquals_personal_information(self, actual, expected):
@@ -146,6 +159,9 @@ class DonorTests(TestCase):
         self.assertEquals(actual['mobile'], expected.mobile)
         self.assertEquals(actual['phone'], expected.phone)
 
+    def assertEquals_additional_information(self, actual, expected):
+        self.assertEquals(actual['ancestry'], expected.ancestry)
+
     def test_get_ancestry_choices(self):
         # Given
 
@@ -153,7 +169,7 @@ class DonorTests(TestCase):
         response = self.client.get('/api/backend/ancestry_choices')
 
         # Then
-        self.assertEquals(response.data, Donor.ANCESTRY_CHOICES)
+        self.assertEquals(response.data, AdditionalInformation.ANCESTRY_CHOICES)
 
 
 class DonorDAOTests(TestCase):

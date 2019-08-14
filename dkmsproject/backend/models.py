@@ -62,10 +62,7 @@ class ContactDetails(models.Model):
     def __str__(self):
         return self.email
 
-
-# TODO: split into multiple model elements (see web form): Personal information, Private address, Contact details, ...
-# TODO: some fields shall be nullable, some not, see the online DKMS web form for reference
-class Donor(models.Model):
+class AdditionalInformation(models.Model):
     ANCESTRY_CHOICES = [
       ("**", "No selection"),
       ("DE", "Germany"),
@@ -317,6 +314,19 @@ class Donor(models.Model):
       ("ZW", "Zimbabwe"),
     ]
 
+    ancestry = models.CharField(
+        max_length=2,
+        choices=ANCESTRY_CHOICES,
+        default="CN",
+    )
+
+    def __str__(self):
+        return self.ancestry
+
+
+# TODO: split into multiple model elements (see web form): Personal information, Private address, Contact details, ...
+# TODO: some fields shall be nullable, some not, see the online DKMS web form for reference
+class Donor(models.Model):
     personal_information = models.OneToOneField(
         PersonalInformation,
         on_delete=models.CASCADE,
@@ -335,10 +345,10 @@ class Donor(models.Model):
         null=True
     )
 
-    ancestry = models.CharField(
-        max_length=2,
-        choices=ANCESTRY_CHOICES,
-        default="CN",
+    additional_information = models.OneToOneField(
+        AdditionalInformation,
+        on_delete=models.CASCADE,
+        null=True
     )
 
     # TODO: remove description from model

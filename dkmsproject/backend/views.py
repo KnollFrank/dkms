@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Donor
+from .models import Donor, AdditionalInformation
 from .serializers import *
 from pprint import pprint
 
@@ -71,4 +71,4 @@ def donor_detail(request, pk):
 
 @api_view(['GET'])
 def get_ancestry_choices(request):
-    return Response(Donor.ANCESTRY_CHOICES)
+    return Response(AdditionalInformation.ANCESTRY_CHOICES)
