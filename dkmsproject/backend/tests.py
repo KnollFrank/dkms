@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Donor, PersonalInformation, PrivateAddress
+from .models import Donor, PersonalInformation, PrivateAddress, ContactDetails
 from .serializers import DonorSerializer
 from rest_framework.renderers import JSONRenderer
 from pprint import pprint
@@ -21,13 +21,16 @@ def create_donor(id=1, first_name="some first name"):
             co='some co',
             apartment='some apartment')
 
+    contact_details = ContactDetails(
+            email="donor001@email.com",
+            mobile="07471/3807",
+            phone="00000000")
+
     donor = Donor(
         id=id,
         personal_information=personal_information,
         private_address=private_address,
-        email="donor001@email.com",
-        mobile="07471/3807",
-        phone="00000000",
+        contact_details=contact_details,
         description= "Donor 001 description",
         ancestry="WS",
         dataprotectionprivacy=True)
@@ -43,6 +46,10 @@ def create_and_save_donor(id=1, first_name="some first name"):
     private_address = donor.private_address
     private_address.save()
     donor.private_address = private_address
+
+    contact_details = donor.contact_details
+    contact_details.save()
+    donor.contact_details = contact_details
 
     donor.save()
     return donor
@@ -70,12 +77,14 @@ class DonorTests(TestCase):
                 'co': 'a some co',
                 'apartment': 'a some apartment',
            },
-          'mobile': '07471/3807',
+           'contact_details': {
+                'email': email,
+                'mobile': '07471/3807',
+                'phone': '000000006',
+           },
           'ancestry': 'WS',
           'dataprotectionprivacy': True,
           'description': 'a Donor 001 description',
-          'email': email,
-          'phone': '000000006',
           'pk': 4712,
           }
 
@@ -86,7 +95,7 @@ class DonorTests(TestCase):
         # Then
         self.assertTrue(Donor.objects.filter(pk=response.data['id']).exists())
         donorFromDb = Donor.objects.get(pk=response.data['id'])
-        self.assertEquals(donorFromDb.email, email)
+        self.assertEquals(donorFromDb.contact_details.email, email)
         self.assertEquals(donorFromDb.personal_information.first_name, first_name)
         self.assertEquals(donorFromDb.private_address.address, address)
 
@@ -109,9 +118,10 @@ class DonorTests(TestCase):
             actual = response.data['private_address'],
             expected = donor.private_address)
 
-        self.assertEquals(response.data['email'], donor.email)
-        self.assertEquals(response.data['mobile'], donor.mobile)
-        self.assertEquals(response.data['phone'], donor.phone)
+        self.assertEquals_contact_details(
+            actual = response.data['contact_details'],
+            expected = donor.contact_details)
+
         self.assertEquals(response.data['description'], donor.description)
         self.assertEquals(response.data['ancestry'], donor.ancestry)
         self.assertEquals(response.data['dataprotectionprivacy'], donor.dataprotectionprivacy)
@@ -130,6 +140,11 @@ class DonorTests(TestCase):
         self.assertEquals(actual['houseno'], expected.houseno)
         self.assertEquals(actual['co'], expected.co)
         self.assertEquals(actual['apartment'], expected.apartment)
+
+    def assertEquals_contact_details(self, actual, expected):
+        self.assertEquals(actual['email'], expected.email)
+        self.assertEquals(actual['mobile'], expected.mobile)
+        self.assertEquals(actual['phone'], expected.phone)
 
     def test_get_ancestry_choices(self):
         # Given

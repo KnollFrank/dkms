@@ -54,6 +54,15 @@ class PrivateAddress(models.Model):
     def __str__(self):
         return self.address
 
+class ContactDetails(models.Model):
+    email = models.EmailField()
+    mobile = models.CharField(max_length=20, blank=True)
+    phone = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.email
+
+
 # TODO: split into multiple model elements (see web form): Personal information, Private address, Contact details, ...
 # TODO: some fields shall be nullable, some not, see the online DKMS web form for reference
 class Donor(models.Model):
@@ -320,16 +329,19 @@ class Donor(models.Model):
         null=True
     )
 
+    contact_details = models.OneToOneField(
+        ContactDetails,
+        on_delete=models.CASCADE,
+        null=True
+    )
+
     ancestry = models.CharField(
         max_length=2,
         choices=ANCESTRY_CHOICES,
         default="CN",
     )
 
-    email = models.EmailField()
-    mobile = models.CharField(max_length=20, blank=True)
-    phone = models.CharField(max_length=20)
-
+    # TODO: remove description from model
     description = models.TextField(blank=True, null=True)
     dataprotectionprivacy = models.BooleanField(default=True)
     createdAt = models.DateTimeField("Created At", auto_now_add=True)

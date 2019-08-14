@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Donor, PersonalInformation, PrivateAddress
+from .models import Donor, PersonalInformation, PrivateAddress, ContactDetails
 
 class PersonalInformationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,10 +16,16 @@ class PrivateAddressSerializer(serializers.ModelSerializer):
         model = PrivateAddress
         fields = '__all__'
 
+class ContactDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactDetails
+        fields = '__all__'
+
 # MAYBE-TODO: verwende HyperlinkedModelSerializer statt ModelSerializer
 class DonorSerializer(serializers.ModelSerializer):
     personal_information = PersonalInformationSerializer()
     private_address = PrivateAddressSerializer()
+    contact_details = ContactDetailsSerializer()
 
     class Meta:
         model = Donor
@@ -32,8 +38,12 @@ class DonorSerializer(serializers.ModelSerializer):
         private_address_data = validated_data.pop('private_address')
         private_address = PrivateAddress.objects.create(**private_address_data)
 
+        contact_details_data = validated_data.pop('contact_details')
+        contact_details = ContactDetails.objects.create(**contact_details_data)
+
         donor = Donor.objects.create(
             personal_information=personal_information,
             private_address=private_address,
+            contact_details=contact_details,
             **validated_data)
         return donor
