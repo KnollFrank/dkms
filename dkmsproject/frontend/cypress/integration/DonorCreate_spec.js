@@ -24,6 +24,11 @@ function assertEquals_contact_details(actual, expected) {
   cy.wrap(actual).its('contact_details.phone').should('eq', expected.phone)
 }
 
+function assertEquals_additional_information(actual, expected) {
+  expect(actual).to.have.property('additional_information')
+  cy.wrap(actual).its('additional_information.ancestry').should('eq', expected.ancestry)
+}
+
 describe("DonorCreate web form", () => {
   beforeEach(() => {
     cy.exec("npm run flush");
@@ -201,8 +206,8 @@ describe("DonorCreate web form", () => {
           assertEquals_personal_information(donor_actual, donor)
           assertEquals_private_address(donor_actual, donor)
           assertEquals_contact_details(donor_actual, donor)
+          assertEquals_additional_information(donor_actual, donor)
           expect(donor_actual).to.have.property('description', donor.description)
-          expect(donor_actual).to.have.property('ancestry', donor.ancestry)
           expect(donor_actual).to.have.property('dataprotectionprivacy', donor.dataprotectionprivacy)
          });
     });

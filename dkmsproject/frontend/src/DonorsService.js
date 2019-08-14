@@ -26,8 +26,10 @@ export default class DonorsService {
             mobile: donor.mobile,
             phone: donor.phone,
           },
+          additional_information: {
+            ancestry: donor.ancestry
+          },
           description: donor.description,
-          ancestry: donor.ancestry,
           ancestry_choices: donor.ancestry_choices,
           dataprotectionprivacy: donor.dataprotectionprivacy
         };
