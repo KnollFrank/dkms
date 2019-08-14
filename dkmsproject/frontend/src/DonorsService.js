@@ -6,23 +6,24 @@ export default class DonorsService {
     createDonor(donor) {
         const url = `${API_URL}/api/backend/`;
         const donor_dict = {
-          'personal_information':
-            {
-              'salutation': donor.salutation,
-              'title': donor.title,
-              'first_name': donor.first_name,
-              'last_name': donor.last_name
+          personal_information: {
+              salutation: donor.salutation,
+              title: donor.title,
+              first_name: donor.first_name,
+              last_name: donor.last_name
+            },
+          private_address: {
+              address: donor.address,
+              street: donor.street,
+              city: donor.city,
+              zipcode: donor.zipcode,
+              houseno: donor.houseno,
+              co: donor.co,
+              apartment: donor.apartment,
             },
           email: donor.email,
           phone: donor.phone,
           mobile: donor.mobile,
-          address: donor.address,
-          street: donor.street,
-          city: donor.city,
-          houseno: donor.houseno,
-          zipcode: donor.zipcode,
-          co: donor.co,
-          apartment: donor.apartment,
           description: donor.description,
           ancestry: donor.ancestry,
           ancestry_choices: donor.ancestry_choices,

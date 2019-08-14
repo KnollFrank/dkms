@@ -172,22 +172,26 @@ describe("DonorCreate web form", () => {
           expect(response.body.data).to.lengthOf(1);
           const donor_actual = response.body.data[0];
 
+          // TODO: extract method
           expect(donor_actual).to.have.property('personal_information')
           cy.wrap(donor_actual).its('personal_information.salutation').should('eq', donor.salutation)
           cy.wrap(donor_actual).its('personal_information.title').should('eq', donor.title)
           cy.wrap(donor_actual).its('personal_information.first_name').should('eq', donor.first_name)
           cy.wrap(donor_actual).its('personal_information.last_name').should('eq', donor.last_name)
 
+          // TODO: extract method
+          expect(donor_actual).to.have.property('private_address')
+          cy.wrap(donor_actual).its('private_address.address').should('eq', donor.address)
+          cy.wrap(donor_actual).its('private_address.street').should('eq', donor.street)
+          cy.wrap(donor_actual).its('private_address.city').should('eq', donor.city)
+          cy.wrap(donor_actual).its('private_address.zipcode').should('eq', donor.zipcode)
+          cy.wrap(donor_actual).its('private_address.houseno').should('eq', donor.houseno)
+          cy.wrap(donor_actual).its('private_address.co').should('eq', donor.co)
+          cy.wrap(donor_actual).its('private_address.apartment').should('eq', donor.apartment)
+
           expect(donor_actual).to.have.property('email', donor.email)
           expect(donor_actual).to.have.property('phone', donor.phone)
           expect(donor_actual).to.have.property('mobile', donor.mobile)
-          expect(donor_actual).to.have.property('address', donor.address)
-          expect(donor_actual).to.have.property('street', donor.street)
-          expect(donor_actual).to.have.property('city', donor.city)
-          expect(donor_actual).to.have.property('houseno', donor.houseno)
-          expect(donor_actual).to.have.property('zipcode', donor.zipcode)
-          expect(donor_actual).to.have.property('co', donor.co)
-          expect(donor_actual).to.have.property('apartment', donor.apartment)
           expect(donor_actual).to.have.property('description', donor.description)
           expect(donor_actual).to.have.property('ancestry', donor.ancestry)
           expect(donor_actual).to.have.property('dataprotectionprivacy', donor.dataprotectionprivacy)

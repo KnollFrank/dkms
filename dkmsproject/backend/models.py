@@ -314,6 +314,12 @@ class Donor(models.Model):
         null=True
     )
 
+    private_address = models.OneToOneField(
+        PrivateAddress,
+        on_delete=models.CASCADE,
+        null=True
+    )
+
     ancestry = models.CharField(
         max_length=2,
         choices=ANCESTRY_CHOICES,
@@ -323,12 +329,6 @@ class Donor(models.Model):
     email = models.EmailField()
     mobile = models.CharField(max_length=20, blank=True)
     phone = models.CharField(max_length=20)
-
-    private_address = models.OneToOneField(
-        PrivateAddress,
-        on_delete=models.CASCADE,
-        null=True
-    )
 
     description = models.TextField(blank=True, null=True)
     dataprotectionprivacy = models.BooleanField(default=True)
