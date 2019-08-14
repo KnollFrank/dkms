@@ -1,3 +1,22 @@
+function assertEquals_personal_information(actual, expected) {
+  expect(actual).to.have.property('personal_information')
+  cy.wrap(actual).its('personal_information.salutation').should('eq', expected.salutation)
+  cy.wrap(actual).its('personal_information.title').should('eq', expected.title)
+  cy.wrap(actual).its('personal_information.first_name').should('eq', expected.first_name)
+  cy.wrap(actual).its('personal_information.last_name').should('eq', expected.last_name)
+}
+
+function assertEquals_private_address(actual, expected) {
+  expect(actual).to.have.property('private_address')
+  cy.wrap(actual).its('private_address.address').should('eq', expected.address)
+  cy.wrap(actual).its('private_address.street').should('eq', expected.street)
+  cy.wrap(actual).its('private_address.city').should('eq', expected.city)
+  cy.wrap(actual).its('private_address.zipcode').should('eq', expected.zipcode)
+  cy.wrap(actual).its('private_address.houseno').should('eq', expected.houseno)
+  cy.wrap(actual).its('private_address.co').should('eq', expected.co)
+  cy.wrap(actual).its('private_address.apartment').should('eq', expected.apartment)
+}
+
 describe("DonorCreate web form", () => {
   beforeEach(() => {
     cy.exec("npm run flush");
@@ -172,22 +191,8 @@ describe("DonorCreate web form", () => {
           expect(response.body.data).to.lengthOf(1);
           const donor_actual = response.body.data[0];
 
-          // TODO: extract method
-          expect(donor_actual).to.have.property('personal_information')
-          cy.wrap(donor_actual).its('personal_information.salutation').should('eq', donor.salutation)
-          cy.wrap(donor_actual).its('personal_information.title').should('eq', donor.title)
-          cy.wrap(donor_actual).its('personal_information.first_name').should('eq', donor.first_name)
-          cy.wrap(donor_actual).its('personal_information.last_name').should('eq', donor.last_name)
-
-          // TODO: extract method
-          expect(donor_actual).to.have.property('private_address')
-          cy.wrap(donor_actual).its('private_address.address').should('eq', donor.address)
-          cy.wrap(donor_actual).its('private_address.street').should('eq', donor.street)
-          cy.wrap(donor_actual).its('private_address.city').should('eq', donor.city)
-          cy.wrap(donor_actual).its('private_address.zipcode').should('eq', donor.zipcode)
-          cy.wrap(donor_actual).its('private_address.houseno').should('eq', donor.houseno)
-          cy.wrap(donor_actual).its('private_address.co').should('eq', donor.co)
-          cy.wrap(donor_actual).its('private_address.apartment').should('eq', donor.apartment)
+          assertEquals_personal_information(donor_actual, donor)
+          assertEquals_private_address(donor_actual, donor)
 
           expect(donor_actual).to.have.property('email', donor.email)
           expect(donor_actual).to.have.property('phone', donor.phone)
