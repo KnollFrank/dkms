@@ -1,5 +1,10 @@
 from django.test import TestCase
-from .models import Donor, PersonalInformation, PrivateAddress, ContactDetails, AdditionalInformation
+from .models import Donor
+from .models import PersonalInformation
+from .models import PrivateAddress
+from .models import ContactDetails
+from .models import AdditionalInformation
+from .models import DeclarationOfConsent
 from .serializers import DonorSerializer
 from rest_framework.renderers import JSONRenderer
 from pprint import pprint
@@ -28,14 +33,16 @@ def create_donor(id=1, first_name="some first name"):
 
     additional_information = AdditionalInformation(ancestry="WS")
 
+    declaration_of_consent = DeclarationOfConsent(dataprotectionprivacy=True)
+
     donor = Donor(
         id=id,
         personal_information=personal_information,
         private_address=private_address,
         contact_details=contact_details,
         additional_information=additional_information,
-        description= "Donor 001 description",
-        dataprotectionprivacy=True)
+        declaration_of_consent=declaration_of_consent,
+        description= "Donor 001 description")
     return donor
 
 def create_and_save_donor(id=1, first_name="some first name"):
@@ -57,6 +64,10 @@ def create_and_save_donor(id=1, first_name="some first name"):
     additional_information.save()
     donor.additional_information = additional_information
 
+    declaration_of_consent = donor.declaration_of_consent
+    declaration_of_consent.save()
+    donor.declaration_of_consent = declaration_of_consent
+
     donor.save()
     return donor
 
@@ -68,6 +79,7 @@ class DonorTests(TestCase):
         address = 'a Donor 000 Address'
         email = 'adonor001@email.com'
         ancestry = "WS"
+        dataprotectionprivacy = True
         donor = {
           'personal_information': {
                 'salutation':  'Mr',
@@ -92,7 +104,9 @@ class DonorTests(TestCase):
            'additional_information': {
                 'ancestry': ancestry
            },
-          'dataprotectionprivacy': True,
+           'declaration_of_consent': {
+                'dataprotectionprivacy': dataprotectionprivacy
+           },
           'description': 'a Donor 001 description',
           'pk': 4712
           }
@@ -108,6 +122,7 @@ class DonorTests(TestCase):
         self.assertEquals(donorFromDb.personal_information.first_name, first_name)
         self.assertEquals(donorFromDb.private_address.address, address)
         self.assertEquals(donorFromDb.additional_information.ancestry, ancestry)
+        self.assertEquals(donorFromDb.declaration_of_consent.dataprotectionprivacy, dataprotectionprivacy)
 
     def test_getDonor(self):
         # Given
@@ -136,8 +151,11 @@ class DonorTests(TestCase):
             actual = response.data['additional_information'],
             expected = donor.additional_information)
 
+        self.assertEquals_declaration_of_consent(
+            actual = response.data['declaration_of_consent'],
+            expected = donor.declaration_of_consent)
+
         self.assertEquals(response.data['description'], donor.description)
-        self.assertEquals(response.data['dataprotectionprivacy'], donor.dataprotectionprivacy)
 
     def assertEquals_personal_information(self, actual, expected):
         self.assertEquals(actual['salutation'], expected.salutation)
@@ -161,6 +179,9 @@ class DonorTests(TestCase):
 
     def assertEquals_additional_information(self, actual, expected):
         self.assertEquals(actual['ancestry'], expected.ancestry)
+
+    def assertEquals_declaration_of_consent(self, actual, expected):
+        self.assertEquals(actual['dataprotectionprivacy'], expected.dataprotectionprivacy)
 
     def test_get_ancestry_choices(self):
         # Given

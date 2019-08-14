@@ -1,5 +1,10 @@
 from rest_framework import serializers
-from .models import Donor, PersonalInformation, PrivateAddress, ContactDetails, AdditionalInformation
+from .models import Donor
+from .models import PersonalInformation
+from .models import PrivateAddress
+from .models import ContactDetails
+from .models import AdditionalInformation
+from .models import DeclarationOfConsent
 
 class PersonalInformationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,12 +31,18 @@ class AdditionalInformationSerializer(serializers.ModelSerializer):
         model = AdditionalInformation
         fields = '__all__'
 
+class DeclarationOfConsentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DeclarationOfConsent
+        fields = '__all__'
+
 # MAYBE-TODO: verwende HyperlinkedModelSerializer statt ModelSerializer
 class DonorSerializer(serializers.ModelSerializer):
     personal_information = PersonalInformationSerializer()
     private_address = PrivateAddressSerializer()
     contact_details = ContactDetailsSerializer()
     additional_information = AdditionalInformationSerializer()
+    declaration_of_consent = DeclarationOfConsentSerializer()
 
     class Meta:
         model = Donor
@@ -50,10 +61,14 @@ class DonorSerializer(serializers.ModelSerializer):
         additional_information_data = validated_data.pop('additional_information')
         additional_information = AdditionalInformation.objects.create(**additional_information_data)
 
+        declaration_of_consent_data = validated_data.pop('declaration_of_consent')
+        declaration_of_consent = DeclarationOfConsent.objects.create(**declaration_of_consent_data)
+
         donor = Donor.objects.create(
             personal_information=personal_information,
             private_address=private_address,
             contact_details=contact_details,
             additional_information=additional_information,
+            declaration_of_consent=declaration_of_consent,
             **validated_data)
         return donor

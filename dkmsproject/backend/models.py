@@ -324,6 +324,12 @@ class AdditionalInformation(models.Model):
         return self.ancestry
 
 
+class DeclarationOfConsent(models.Model):
+    dataprotectionprivacy = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.dataprotectionprivacy
+
 # TODO: split into multiple model elements (see web form): Personal information, Private address, Contact details, ...
 # TODO: some fields shall be nullable, some not, see the online DKMS web form for reference
 class Donor(models.Model):
@@ -351,9 +357,14 @@ class Donor(models.Model):
         null=True
     )
 
+    declaration_of_consent = models.OneToOneField(
+        DeclarationOfConsent,
+        on_delete=models.CASCADE,
+        null=True
+    )
+
     # TODO: remove description from model
     description = models.TextField(blank=True, null=True)
-    dataprotectionprivacy = models.BooleanField(default=True)
     createdAt = models.DateTimeField("Created At", auto_now_add=True)
 
     def __str__(self):
