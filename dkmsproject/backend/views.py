@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Donor
 from .serializers import *
 
-# TODO: use ModelViewSet?
+# TODO: use APIView or ModelViewSet for donors_list and donor_detail
 
 @api_view(['GET', 'POST'])
 def donors_list(request):

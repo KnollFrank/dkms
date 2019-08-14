@@ -17,3 +17,6 @@ frankknoll@frankknoll-XPS-13-9370:~/web/dkms/dkmsproject/frontend$ npm start
 
 start cypress:
 frankknoll@frankknoll-XPS-13-9370:~/web/dkms/dkmsproject/frontend$ npx cypress open
+
+
+siehe: https://www.django-rest-framework.org/api-guide/relations/#writable-nested-serializers
