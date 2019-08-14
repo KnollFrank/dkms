@@ -1,6 +1,9 @@
 from django.test import TestCase
 from .models import Donor, PersonalInformation
+from .serializers import DonorSerializer
+from rest_framework.renderers import JSONRenderer
 from pprint import pprint
+from collections import OrderedDict
 
 def create_donor(id=1, first_name="some first name"):
     personal_information = PersonalInformation(
@@ -36,6 +39,77 @@ def create_and_save_donor(id=1, first_name="some first name"):
     return donor
 
 class DonorTests(TestCase):
+
+    def test_saveDonor(self):
+        # Given
+        first_name = 'a some first name'
+        email = 'adonor001@email.com'
+        donor = {'address': 'a Donor 000 Address',
+          'ancestry': 'WS',
+          'apartment': 'a some apartment',
+          'city': 'a Tübingen',
+          'co': 'a some co',
+          'dataprotectionprivacy': True,
+          'description': 'a Donor 001 description',
+          'email': email,
+          'houseno': '4711',
+          'mobile': '07471/3807',
+          'personal_information': {
+                                    'salutation':  'Mr',
+                                    'title': 'PROF_DR',
+                                    'first_name': first_name,
+                                    'last_name': 'a Donor last_name'
+                                  },
+          'phone': '000000006',
+          'pk': 4712,
+          'street': 'a Kingersheimer Str.',
+          'zipcode': '72072'}
+
+        # When
+        # response = self.client.post('/api/backend/', donor, content_type='application/x-www-form-urlencoded')
+        response = self.client.post('/api/backend/', donor, content_type='application/json')
+
+        # Then
+        self.assertTrue(Donor.objects.filter(pk=response.data['pk']).exists())
+        donorFromDb = Donor.objects.get(pk=response.data['pk'])
+        self.assertEquals(donorFromDb.email, email)
+        self.assertEquals(donorFromDb.personal_information.first_name, first_name)
+
+    def test_serializeDonor(self):
+        # Given
+        first_name = 'a some first name'
+        email = 'adonor001@email.com'
+        donor_data = {'address': 'a Donor 000 Address',
+          'ancestry': 'WS',
+          'apartment': 'a some apartment',
+          'city': 'a Tübingen',
+          'co': 'a some co',
+          'dataprotectionprivacy': True,
+          'description': 'a Donor 001 description',
+          'email': email,
+          'houseno': '4711',
+          'mobile': '07471/3807',
+          'personal_information': {
+                                    'salutation':  'Mr',
+                                    'title': 'PROF_DR',
+                                    'first_name': first_name,
+                                    'last_name': 'a Donor last_name'
+                                  },
+          'phone': '000000006',
+          'pk': 4712,
+          'street': 'a Kingersheimer Str.',
+          'zipcode': '72072'}
+
+        # When
+        serializer = DonorSerializer(data=donor_data)
+        serializer.is_valid()
+        donor = serializer.save()
+
+        # Then
+        self.assertTrue(Donor.objects.filter(pk=donor.pk).exists())
+        donorFromDb = Donor.objects.get(pk=donor.pk)
+        self.assertEquals(donorFromDb.email, email)
+        self.assertEquals(donorFromDb.personal_information.first_name, first_name)
 
     def test_getDonor(self):
         # Given
