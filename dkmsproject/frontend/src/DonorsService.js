@@ -29,9 +29,11 @@ export default class DonorsService {
           additional_information: {
             ancestry: donor.ancestry
           },
+          declaration_of_consent: {
+            dataprotectionprivacy: donor.dataprotectionprivacy            
+          },
           description: donor.description,
           ancestry_choices: donor.ancestry_choices,
-          dataprotectionprivacy: donor.dataprotectionprivacy
         };
         return axios.post(url, donor_dict);
     }

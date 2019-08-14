@@ -29,6 +29,11 @@ function assertEquals_additional_information(actual, expected) {
   cy.wrap(actual).its('additional_information.ancestry').should('eq', expected.ancestry)
 }
 
+function assertEquals_declaration_of_consent(actual, expected) {
+  expect(actual).to.have.property('declaration_of_consent')
+  cy.wrap(actual).its('declaration_of_consent.dataprotectionprivacy').should('eq', expected.dataprotectionprivacy)
+}
+
 describe("DonorCreate web form", () => {
   beforeEach(() => {
     cy.exec("npm run flush");
@@ -207,8 +212,8 @@ describe("DonorCreate web form", () => {
           assertEquals_private_address(donor_actual, donor)
           assertEquals_contact_details(donor_actual, donor)
           assertEquals_additional_information(donor_actual, donor)
+          assertEquals_declaration_of_consent(donor_actual, donor)
           expect(donor_actual).to.have.property('description', donor.description)
-          expect(donor_actual).to.have.property('dataprotectionprivacy', donor.dataprotectionprivacy)
          });
     });
   });
