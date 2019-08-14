@@ -14,6 +14,7 @@ export default class DonorCreate extends React.Component {
         last_name: '',
         email: '',
         phone: '',
+        mobile: '',
         address: '',
         street: '',
         city: '',

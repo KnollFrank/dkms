@@ -171,10 +171,13 @@ describe("DonorCreate web form", () => {
           // see https://www.chaijs.com/api/bdd/#method_lengthof
           expect(response.body.data).to.lengthOf(1);
           const donor_actual = response.body.data[0];
-          expect(donor_actual).to.have.property('salutation', donor.salutation)
-          expect(donor_actual).to.have.property('title', donor.title)
-          expect(donor_actual).to.have.property('first_name', donor.first_name)
-          expect(donor_actual).to.have.property('last_name', donor.last_name)
+
+          expect(donor_actual).to.have.property('personal_information')
+          cy.wrap(donor_actual).its('personal_information.salutation').should('eq', donor.salutation)
+          cy.wrap(donor_actual).its('personal_information.title').should('eq', donor.title)
+          cy.wrap(donor_actual).its('personal_information.first_name').should('eq', donor.first_name)
+          cy.wrap(donor_actual).its('personal_information.last_name').should('eq', donor.last_name)
+
           expect(donor_actual).to.have.property('email', donor.email)
           expect(donor_actual).to.have.property('phone', donor.phone)
           expect(donor_actual).to.have.property('mobile', donor.mobile)
