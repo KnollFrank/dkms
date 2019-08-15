@@ -53,8 +53,8 @@ describe("DonorCreate web form", () => {
       first_name: 'some first_name',
       last_name: 'some last_name',
       email: 'email@web.de',
-      mobile: "07471/3807",
-      phone: '12345',
+      mobile: "074713807",
+      phone: '1234567',
       address: 'some address',
       street: 'some street',
       city: 'some city',
@@ -177,6 +177,10 @@ describe("DonorCreate web form", () => {
           .get('input[name="zipcode"]')
           .type(donor.zipcode)
           .should("have.value", donor.zipcode);
+
+        cy
+          .get('label[for="id_co_field"]')
+          .click();
 
         cy
           .get('input[name="co"]')
