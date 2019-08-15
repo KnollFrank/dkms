@@ -199,7 +199,7 @@ describe("DonorCreate web form", () => {
         .request('GET', "http://127.0.0.1:8000/api/backend/")
         .then((response) => {
           // see https://www.chaijs.com/api/bdd/#method_lengthof
-          expect(response.body).to.lengthOf(1);
+          expect(response.body).to.have.lengthOf(1);
           const donor_actual = response.body[0];
 
           assertEquals_personal_information(donor_actual, donor)
@@ -229,7 +229,7 @@ describe("DonorCreate web form", () => {
     cy
       .request("http://127.0.0.1:8000/api/backend/")
       .then((response) => {
-        expect(response.body).to.lengthOf(0);
+        expect(response.body).to.have.lengthOf(0);
        });
   });
 });
