@@ -366,28 +366,3 @@ class Donor(models.Model):
 
     def __str__(self):
         return self.personal_information.first_name
-
-# Personal information:
-# + salutation: Mr. / Mrs.
-# + title: Dr., Dr. med., Dr. med. dent., Dr. pharm., Dr. rer. hum., Prof., Prof. Dr.
-# + firstname
-# + lastname
-#
-# Private address:
-# + street
-# + houseno
-# + apartment (optional)
-# + co (optional)
-# + zipcode
-# + city
-#
-# Contact details:
-# + phone (private)
-# + mobile
-# + email
-#
-# Additional Information:
-# + ancestry
-#
-# Declaration of Consent:
-# + dataprotectionprivacy
