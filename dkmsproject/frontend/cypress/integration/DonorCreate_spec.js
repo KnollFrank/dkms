@@ -34,6 +34,13 @@ function assertEquals_declaration_of_consent(actual, expected) {
   cy.wrap(actual).its('declaration_of_consent.dataprotectionprivacy').should('eq', expected.dataprotectionprivacy)
 }
 
+// see https://docs.cypress.io/api/events/catalog-of-events.html#Uncaught-Exceptions
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // returning false here prevents Cypress from
+  // failing the test
+  return false
+})
+
 describe("DonorCreate web form", () => {
   beforeEach(() => {
     cy.exec("npm run flush");
@@ -101,98 +108,100 @@ describe("DonorCreate web form", () => {
 
       // cy.pause()
       // When entering a donor into the web form
-      cy
-        .get('[name="salutation"]')
-        .check(donor.salutation)
-        .should('be.checked');
+      cy.get('[id="root"]').within(() => {
+        cy
+          .get('[name="salutation"]')
+          .check(donor.salutation)
+          .should('be.checked');
 
-      cy
-        .get('[name="title"]')
-        .should('contain', 'Dr.')
-        .should('contain', 'Prof. Dr.')
-        .select(donor.title)
-        .should('have.value', donor.title)
+        cy
+          .get('[name="title"]')
+          .should('contain', 'Dr.')
+          .should('contain', 'Prof. Dr.')
+          .select(donor.title)
+          .should('have.value', donor.title)
 
-      cy
-        .get('[name="ancestry"]')
-        .should('contain', 'Germany')
-        .should('contain', 'Zimbabwe')
-        .select(donor.ancestry)
-        .should('have.value', donor.ancestry)
+        cy
+          .get('[name="ancestry"]')
+          .should('contain', 'Germany')
+          .should('contain', 'Zimbabwe')
+          .select(donor.ancestry)
+          .should('have.value', donor.ancestry)
 
-      cy
-        .get('input[name="first_name"]')
-        .type(donor.first_name)
-        .should("have.value", donor.first_name);
+        cy
+          .get('input[name="first_name"]')
+          .type(donor.first_name)
+          .should("have.value", donor.first_name);
 
-      cy
-        .get('input[name="last_name"]')
-        .type(donor.last_name)
-        .should("have.value", donor.last_name);
+        cy
+          .get('input[name="last_name"]')
+          .type(donor.last_name)
+          .should("have.value", donor.last_name);
 
-      cy
-        .get('input[name="email"]')
-        .type(donor.email)
-        .should("have.value", donor.email);
+        cy
+          .get('input[name="email"]')
+          .type(donor.email)
+          .should("have.value", donor.email);
 
-      cy
-        .get('input[name="mobile"]')
-        .type(donor.mobile)
-        .should("have.value", donor.mobile);
+        cy
+          .get('input[name="mobile"]')
+          .type(donor.mobile)
+          .should("have.value", donor.mobile);
 
-      cy
-        .get('input[name="phone"]')
-        .type(donor.phone)
-        .should("have.value", donor.phone);
+        cy
+          .get('input[name="phone"]')
+          .type(donor.phone)
+          .should("have.value", donor.phone);
 
-      cy
-        .get('input[name="address"]')
-        .type(donor.address)
-        .should("have.value", donor.address);
+        cy
+          .get('input[name="address"]')
+          .type(donor.address)
+          .should("have.value", donor.address);
 
-      cy
-        .get('input[name="street"]')
-        .type(donor.street)
-        .should("have.value", donor.street);
+        cy
+          .get('input[name="street"]')
+          .type(donor.street)
+          .should("have.value", donor.street);
 
-      cy
-        .get('input[name="city"]')
-        .type(donor.city)
-        .should("have.value", donor.city);
+        cy
+          .get('input[name="city"]')
+          .type(donor.city)
+          .should("have.value", donor.city);
 
-      cy
-        .get('input[name="houseno"]')
-        .type(donor.houseno)
-        .should("have.value", donor.houseno);
+        cy
+          .get('input[name="houseno"]')
+          .type(donor.houseno)
+          .should("have.value", donor.houseno);
 
-      cy
-        .get('input[name="zipcode"]')
-        .type(donor.zipcode)
-        .should("have.value", donor.zipcode);
+        cy
+          .get('input[name="zipcode"]')
+          .type(donor.zipcode)
+          .should("have.value", donor.zipcode);
 
-      cy
-        .get('input[name="co"]')
-        .type(donor.co)
-        .should("have.value", donor.co);
+        cy
+          .get('input[name="co"]')
+          .type(donor.co)
+          .should("have.value", donor.co);
 
-      cy
-        .get('input[name="apartment"]')
-        .type(donor.apartment)
-        .should("have.value", donor.apartment);
+        cy
+          .get('input[name="apartment"]')
+          .type(donor.apartment)
+          .should("have.value", donor.apartment);
 
-      let checkbox = cy.get('input[name="dataprotectionprivacy"]')
-      if(donor.dataprotectionprivacy) {
+        let checkbox = cy.get('input[name="dataprotectionprivacy"]')
+        if(donor.dataprotectionprivacy) {
+            checkbox
+              .check()
+              .should('be.checked')
+        } else {
           checkbox
-            .check()
-            .should('be.checked')
-      } else {
-        checkbox
-          .uncheck()
-          .should('not.be.checked')
-      }
+            .uncheck()
+            .should('not.be.checked')
+        }
 
-      // And submitting the web form
-      cy.get("form").submit();
+        // And submitting the web form
+        cy.get('form').submit();
+      });
 
       // Then the entered donor has been saved to the database
       cy
@@ -214,17 +223,19 @@ describe("DonorCreate web form", () => {
   it("should not accept an invalid email", () => {
     cy.visit("/");
 
-    cy
-      .get('input[name="email"]')
-      .type("invalid email");
+    cy.get('[id="root"]').within(() => {
+      cy
+        .get('input[name="email"]')
+        .type("invalid email");
 
-    cy.get("form").submit();
+      cy.get('form').submit();
 
-    cy
-     .get('input[name="email"]')
-     .parent()
-     .get('.invalid-feedback')
-     .should('contain.text', 'Die E-Mail-Adresse muss ein @-Zeichen enthalten. In der Angabe "invalidemail" fehlt ein @-Zeichen.');
+      cy
+       .get('input[name="email"]')
+       .parent()
+       .get('.invalid-feedback')
+       .should('contain.text', 'Die E-Mail-Adresse muss ein @-Zeichen enthalten. In der Angabe "invalidemail" fehlt ein @-Zeichen.');
+     });
 
     cy
       .request("http://127.0.0.1:8000/api/backend/")
