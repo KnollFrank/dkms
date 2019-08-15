@@ -330,7 +330,6 @@ class DeclarationOfConsent(models.Model):
     def __str__(self):
         return self.dataprotectionprivacy
 
-# TODO: split into multiple model elements (see web form): Personal information, Private address, Contact details, ...
 # TODO: some fields shall be nullable, some not, see the online DKMS web form for reference
 class Donor(models.Model):
     personal_information = models.OneToOneField(
