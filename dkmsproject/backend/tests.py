@@ -49,7 +49,6 @@ def create_and_save_donor(id=1, first_name="some first name"):
 
     personal_information = donor.personal_information
     personal_information.save()
-    # TODO: remove the following line and replace with: Donor(personal_information=personal_information), dito other fields
     donor.personal_information = personal_information
 
     private_address = donor.private_address
