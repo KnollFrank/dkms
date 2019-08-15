@@ -40,7 +40,6 @@ describe('DonorCreate', () => {
       phone: '12345',
       mobile: '07129/922825',
       address: 'some address',
-      description: 'some description'
     };
 
     // When entering a donor
@@ -51,7 +50,6 @@ describe('DonorCreate', () => {
     enter('input[name="phone"]', donor.phone);
     enter('input[name="mobile]', donor.mobile);
     enter('input[name="address"]', donor.address);
-    enter('textarea[name="description"]', donor.description);
 
     // And clicking the send button
     const button = donorCreate.find('[type="submit"]').first();

@@ -22,7 +22,6 @@ export default class DonorCreate extends React.Component {
         zipcode: '',
         co: '',
         apartment: '',
-        description: '',
         ancestry: '',
         ancestry_choices: [],
         dataprotectionprivacy: false
@@ -265,17 +264,6 @@ export default class DonorCreate extends React.Component {
                       type="text"
                       name="apartment"
                       value={this.state.apartment}
-                      onChange={this.handleUserInput}
-                    />
-                    <div className="invalid-feedback" />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor='description'>Description:</label>
-                    <textarea
-                      className="form-control"
-                      name="description"
-                      value={this.state.description}
                       onChange={this.handleUserInput}
                     />
                     <div className="invalid-feedback" />

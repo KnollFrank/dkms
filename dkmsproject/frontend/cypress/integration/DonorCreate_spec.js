@@ -55,7 +55,6 @@ describe("DonorCreate web form", () => {
       zipcode: '0815',
       co: 'some co',
       apartment: 'some apartment',
-      description: 'some description',
       ancestry: 'DE',
       dataprotectionprivacy: true
     };
@@ -181,11 +180,6 @@ describe("DonorCreate web form", () => {
         .type(donor.apartment)
         .should("have.value", donor.apartment);
 
-      cy
-        .get('textarea[name="description"]')
-        .type(donor.description)
-        .should("have.value", donor.description);
-
       let checkbox = cy.get('input[name="dataprotectionprivacy"]')
       if(donor.dataprotectionprivacy) {
           checkbox
@@ -213,7 +207,6 @@ describe("DonorCreate web form", () => {
           assertEquals_contact_details(donor_actual, donor)
           assertEquals_additional_information(donor_actual, donor)
           assertEquals_declaration_of_consent(donor_actual, donor)
-          expect(donor_actual).to.have.property('description', donor.description)
          });
     });
   });

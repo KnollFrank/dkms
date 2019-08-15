@@ -30,9 +30,9 @@ export default class DonorsService {
             ancestry: donor.ancestry
           },
           declaration_of_consent: {
-            dataprotectionprivacy: donor.dataprotectionprivacy            
+            dataprotectionprivacy: donor.dataprotectionprivacy
           },
-          description: donor.description,
+          // TODO: das sieht falsch aus, deswegen in DonorCreate_spec.js programmatisch testen, ob dieses Feld in der UI korrekt gesetzt wird.
           ancestry_choices: donor.ancestry_choices,
         };
         return axios.post(url, donor_dict);

@@ -363,8 +363,6 @@ class Donor(models.Model):
         null=True
     )
 
-    # TODO: remove description from model
-    description = models.TextField(blank=True, null=True)
     createdAt = models.DateTimeField("Created At", auto_now_add=True)
 
     def __str__(self):

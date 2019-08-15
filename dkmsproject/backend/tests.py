@@ -41,8 +41,7 @@ def create_donor(id=1, first_name="some first name"):
         private_address=private_address,
         contact_details=contact_details,
         additional_information=additional_information,
-        declaration_of_consent=declaration_of_consent,
-        description= "Donor 001 description")
+        declaration_of_consent=declaration_of_consent)
     return donor
 
 def create_and_save_donor(id=1, first_name="some first name"):
@@ -50,6 +49,7 @@ def create_and_save_donor(id=1, first_name="some first name"):
 
     personal_information = donor.personal_information
     personal_information.save()
+    # TODO: remove the following line and replace with: Donor(personal_information=personal_information), dito other fields
     donor.personal_information = personal_information
 
     private_address = donor.private_address
@@ -107,7 +107,6 @@ class DonorTests(TestCase):
            'declaration_of_consent': {
                 'dataprotectionprivacy': dataprotectionprivacy
            },
-          'description': 'a Donor 001 description',
           'pk': 4712
           }
 
@@ -154,8 +153,6 @@ class DonorTests(TestCase):
         self.assertEquals_declaration_of_consent(
             actual = response.data['declaration_of_consent'],
             expected = donor.declaration_of_consent)
-
-        self.assertEquals(response.data['description'], donor.description)
 
     def assertEquals_personal_information(self, actual, expected):
         self.assertEquals(actual['salutation'], expected.salutation)
