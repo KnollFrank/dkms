@@ -36,7 +36,6 @@ class DeclarationOfConsentSerializer(serializers.ModelSerializer):
         model = DeclarationOfConsent
         fields = '__all__'
 
-# MAYBE-TODO: verwende HyperlinkedModelSerializer statt ModelSerializer
 class DonorSerializer(serializers.ModelSerializer):
     personal_information = PersonalInformationSerializer()
     private_address = PrivateAddressSerializer()
