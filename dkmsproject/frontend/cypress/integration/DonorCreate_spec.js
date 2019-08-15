@@ -196,11 +196,11 @@ describe("DonorCreate web form", () => {
 
       // Then the entered donor has been saved to the database
       cy
-        .request("http://127.0.0.1:8000/api/backend/")
+        .request('GET', "http://127.0.0.1:8000/api/backend/")
         .then((response) => {
           // see https://www.chaijs.com/api/bdd/#method_lengthof
-          expect(response.body.data).to.lengthOf(1);
-          const donor_actual = response.body.data[0];
+          expect(response.body).to.lengthOf(1);
+          const donor_actual = response.body[0];
 
           assertEquals_personal_information(donor_actual, donor)
           assertEquals_private_address(donor_actual, donor)
@@ -229,7 +229,7 @@ describe("DonorCreate web form", () => {
     cy
       .request("http://127.0.0.1:8000/api/backend/")
       .then((response) => {
-        expect(response.body.data).to.lengthOf(0);
+        expect(response.body).to.lengthOf(0);
        });
   });
 });

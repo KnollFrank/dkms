@@ -17,10 +17,24 @@ from django.contrib import admin
 from django.urls import path
 from backend import views
 from django.conf.urls import url
+from backend.views import DonorViewSet
+from rest_framework import renderers
+from rest_framework.urlpatterns import format_suffix_patterns
 
-urlpatterns = [
+donor_list = DonorViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+})
+
+donor_detail = DonorViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'delete': 'destroy'
+})
+
+urlpatterns = format_suffix_patterns([
     path('admin/', admin.site.urls),
-    url(r'^api/backend/$', views.donors_list),
-    url(r'^api/backend/(?P<pk>[0-9]+)$', views.donor_detail),
+    path(r'api/backend/', donor_list, name='donor-list'),
+    path(r'api/backend/<int:pk>', donor_detail, name='donor-detail'),
     url(r'^api/backend/ancestry_choices$', views.get_ancestry_choices),
-]
+])
