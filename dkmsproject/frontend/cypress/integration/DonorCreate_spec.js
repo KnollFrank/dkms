@@ -238,7 +238,8 @@ describe("DonorCreate web form", () => {
        .get('input[name="email"]')
        .parent()
        .get('.invalid-feedback')
-       .should('contain.text', 'Die E-Mail-Adresse muss ein @-Zeichen enthalten. In der Angabe "invalidemail" fehlt ein @-Zeichen.');
+       .should('contain.text', 'Die E-Mail-Adresse muss ein @-Zeichen enthalten. In der Angabe "invalidemail" fehlt ein @-Zeichen.')
+       .should('be.visible');
      });
 
     cy
