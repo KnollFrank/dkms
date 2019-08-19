@@ -267,4 +267,43 @@ describe("DonorCreate web form", () => {
      });
   });
 
+  function create_required_field_test(field_name, get_element_containing_error, error_text) {
+    it.only("should not accept an empty required " + field_name, () => {
+      cy.visit("/");
+      cy.get('[id="root"]').within(() => {
+        cy.get('form').submit();
+        let field = cy.get('[name="' + field_name + '"]');
+        get_element_containing_error(field)
+         .find('.parsley-errors-list')
+         .should('contain.text', error_text);
+       });
+     });
+  };
+
+  create_required_field_test(
+    "salutation",
+    element => { return element.parent().parent(); },
+    'Choose a salutation.');
+
+   create_required_field_test(
+     "dataprotectionprivacy",
+     element => { return element.parent().parent(); },
+     'This value is required.');
+
+  [
+    "first_name",
+    "last_name",
+    "street",
+    "houseno",
+    "zipcode",
+    "city",
+    "email",
+    "ancestry"
+  ].forEach(function(field_name) {
+    create_required_field_test(
+      field_name,
+      element => { return element.parent(); },
+      'This value is required.');
+  });
+
 });
