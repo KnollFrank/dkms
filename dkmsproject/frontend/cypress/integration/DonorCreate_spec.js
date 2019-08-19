@@ -237,8 +237,8 @@ describe("DonorCreate web form", () => {
       cy
        .get('input[name="email"]')
        .parent()
-       .get('.invalid-feedback')
-       .should('contain.text', 'Die E-Mail-Adresse muss ein @-Zeichen enthalten. In der Angabe "invalidemail" fehlt ein @-Zeichen.')
+       .find('.parsley-errors-list')
+       .should('contain.text', 'This value should be a valid email.')
        .should('be.visible');
      });
 
@@ -248,4 +248,23 @@ describe("DonorCreate web form", () => {
         expect(response.body).to.have.lengthOf(0);
        });
   });
+
+  it("should not accept an invalid phone", () => {
+    cy.visit("/");
+
+    cy.get('[id="root"]').within(() => {
+      cy
+        .get('input[name="phone"]')
+        .type('1234567890l')
+
+      cy.get('form').submit();
+
+      cy
+       .get('input[name="phone"]')
+       .parent()
+       .find('.parsley-errors-list')
+       .should('contain.text', 'This value seems to be invalid.');
+     });
+  });
+
 });
