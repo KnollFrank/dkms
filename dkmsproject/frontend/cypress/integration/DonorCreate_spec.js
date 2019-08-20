@@ -266,28 +266,27 @@ describe("DonorCreate web form", () => {
      });
   });
 
-  function create_required_field_test(field_name, get_element_containing_error, error_text) {
+  function create_required_field_test(field_name, error_text) {
     it("should not accept an empty required " + field_name, () => {
       cy.visit("/");
       cy.get('[id="root"]').within(() => {
         cy.get('form').submit();
-        let field = cy.get('[name="' + field_name + '"]');
-        get_element_containing_error(field)
-         .find('.invalid-feedback')
-         .should('contain.text', error_text)
-         .should('be.visible');
+        cy
+          .get('[name="' + field_name + '"]')
+          .parent()
+          .find('.invalid-feedback')
+          .should('contain.text', error_text)
+          .should('be.visible');
        });
      });
   };
 
   create_required_field_test(
     "salutation",
-    element => { return element.parent(); },
     'Wählen Sie eine dieser Optionen aus.Wählen Sie eine dieser Optionen aus.');
 
    create_required_field_test(
      "dataprotectionprivacy",
-     element => { return element.parent(); },
      'Klicken Sie dieses Kästchen an, wenn Sie fortfahren möchten.');
 
   [
@@ -301,13 +300,11 @@ describe("DonorCreate web form", () => {
   ].forEach(function(field_name) {
     create_required_field_test(
       field_name,
-      element => { return element.parent(); },
       'Füllen Sie dieses Feld aus.');
   });
 
   create_required_field_test(
     "ancestry",
-    element => { return element.parent(); },
     'Wählen Sie ein Element in der Liste aus.');
 
 });
