@@ -285,9 +285,13 @@ describe("DonorCreate web form", () => {
     "salutation",
     'Wählen Sie eine dieser Optionen aus.Wählen Sie eine dieser Optionen aus.');
 
-   create_required_field_test(
+  create_required_field_test(
      "dataprotectionprivacy",
      'Klicken Sie dieses Kästchen an, wenn Sie fortfahren möchten.');
+
+  create_required_field_test(
+    "ancestry",
+    'Wählen Sie ein Element in der Liste aus.');
 
   [
     "first_name",
@@ -302,9 +306,4 @@ describe("DonorCreate web form", () => {
       field_name,
       'Füllen Sie dieses Feld aus.');
   });
-
-  create_required_field_test(
-    "ancestry",
-    'Wählen Sie ein Element in der Liste aus.');
-
 });
