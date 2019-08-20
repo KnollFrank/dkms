@@ -67,20 +67,13 @@ describe("DonorCreate web form", () => {
     };
   }
 
-  var tests = [
+  const tests = [
       {
         donor: (() => {
           let donor = createSomeDonor();
           donor.dataprotectionprivacy = true;
           return donor;})(),
         desc: 'dataprotectionprivacy = true'
-      },
-      {
-        donor: (() => {
-          let donor = createSomeDonor();
-          donor.dataprotectionprivacy = false;
-          return donor;})(),
-        desc: 'dataprotectionprivacy = false'
       },
       {
         donor: (() => {
@@ -99,7 +92,7 @@ describe("DonorCreate web form", () => {
     ];
 
   tests.forEach(function(test) {
-    xit("should create a donor having " + test.desc + " using a web form", () => {
+    it("should create a donor having " + test.desc + " using a web form", () => {
       // Given a web form
       cy.visit("/");
 
