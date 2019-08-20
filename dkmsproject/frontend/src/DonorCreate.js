@@ -114,9 +114,13 @@ export default class DonorCreate extends React.Component {
 
                   <div className="form-group">
                     <label htmlFor='ancestry'>Ancestry:</label>
-                    <select name="ancestry"
+                    <select className="form-control"
+                            name="ancestry"
+                            id="ancestry"
+                            required
                             value={this.state.ancestry}
                             onChange={this.handleUserInput}>
+                            <option value="" selected>Please select</option>
                             {
                               this.state.ancestry_choices.map(
                                 function(ancestry_choice) {
@@ -124,6 +128,7 @@ export default class DonorCreate extends React.Component {
                                 })
                             }
                     </select>
+                    <div className="invalid-feedback" />
                   </div>
 
                   <div className="form-group">

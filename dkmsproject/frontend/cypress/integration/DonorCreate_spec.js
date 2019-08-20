@@ -274,7 +274,8 @@ describe("DonorCreate web form", () => {
         let field = cy.get('[name="' + field_name + '"]');
         get_element_containing_error(field)
          .find('.invalid-feedback')
-         .should('contain.text', error_text);
+         .should('contain.text', error_text)
+         .should('be.visible');
        });
      });
   };
@@ -297,13 +298,17 @@ describe("DonorCreate web form", () => {
     "houseno",
     "zipcode",
     "city",
-    "email",
-  //  "ancestry"
+    "email"
   ].forEach(function(field_name) {
     create_required_field_test(
       field_name,
       element => { return element.parent(); },
       'Füllen Sie dieses Feld aus.');
   });
+
+  create_required_field_test(
+    "ancestry",
+    element => { return element.parent(); },
+    'Wählen Sie ein Element in der Liste aus.');
 
 });
