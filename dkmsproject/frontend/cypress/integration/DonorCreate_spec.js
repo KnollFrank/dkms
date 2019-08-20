@@ -266,44 +266,59 @@ describe("DonorCreate web form", () => {
      });
   });
 
-  function create_required_field_test(field_name, error_text) {
-    it("should not accept an empty required " + field_name, () => {
+  [
+    {
+      field_name: "salutation",
+      error_text: 'Wählen Sie eine dieser Optionen aus.Wählen Sie eine dieser Optionen aus.'
+    },
+    {
+      field_name: "dataprotectionprivacy",
+      error_text: 'Klicken Sie dieses Kästchen an, wenn Sie fortfahren möchten.'
+    },
+    {
+      field_name: "ancestry",
+      error_text: 'Wählen Sie ein Element in der Liste aus.'
+    },
+    {
+      field_name: "first_name",
+      error_text: 'Füllen Sie dieses Feld aus.'
+    },
+    {
+      field_name: "last_name",
+      error_text: 'Füllen Sie dieses Feld aus.'
+    },
+    {
+      field_name: "street",
+      error_text: 'Füllen Sie dieses Feld aus.'
+    },
+    {
+      field_name: "houseno",
+      error_text: 'Füllen Sie dieses Feld aus.'
+    },
+    {
+      field_name: "zipcode",
+      error_text: 'Füllen Sie dieses Feld aus.'
+    },
+    {
+      field_name: "city",
+      error_text: 'Füllen Sie dieses Feld aus.'
+    },
+    {
+      field_name: "email",
+      error_text: 'Füllen Sie dieses Feld aus.'
+    },
+  ].forEach(test => {
+    it("should not accept an empty required " + test.field_name, () => {
       cy.visit("/");
       cy.get('[id="root"]').within(() => {
         cy.get('form').submit();
         cy
-          .get('[name="' + field_name + '"]')
+          .get('[name="' + test.field_name + '"]')
           .parent()
           .find('.invalid-feedback')
-          .should('contain.text', error_text)
+          .should('contain.text', test.error_text)
           .should('be.visible');
        });
      });
-  };
-
-  create_required_field_test(
-    "salutation",
-    'Wählen Sie eine dieser Optionen aus.Wählen Sie eine dieser Optionen aus.');
-
-  create_required_field_test(
-     "dataprotectionprivacy",
-     'Klicken Sie dieses Kästchen an, wenn Sie fortfahren möchten.');
-
-  create_required_field_test(
-    "ancestry",
-    'Wählen Sie ein Element in der Liste aus.');
-
-  [
-    "first_name",
-    "last_name",
-    "street",
-    "houseno",
-    "zipcode",
-    "city",
-    "email"
-  ].forEach(function(field_name) {
-    create_required_field_test(
-      field_name,
-      'Füllen Sie dieses Feld aus.');
   });
 });
