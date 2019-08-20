@@ -99,7 +99,7 @@ describe("DonorCreate web form", () => {
     ];
 
   tests.forEach(function(test) {
-    it("should create a donor having " + test.desc + " using a web form", () => {
+    xit("should create a donor having " + test.desc + " using a web form", () => {
       // Given a web form
       cy.visit("/");
 
@@ -267,7 +267,7 @@ describe("DonorCreate web form", () => {
   });
 
   function create_required_field_test(field_name, get_element_containing_error, error_text) {
-    it.only("should not accept an empty required " + field_name, () => {
+    it("should not accept an empty required " + field_name, () => {
       cy.visit("/");
       cy.get('[id="root"]').within(() => {
         cy.get('form').submit();
@@ -291,7 +291,7 @@ describe("DonorCreate web form", () => {
      'This value is required.');
 */
   [
-  //  "first_name",
+    "first_name",
     "last_name",
   //  "street",
   //  "houseno",

@@ -130,9 +130,10 @@ export default class DonorCreate extends React.Component {
                     <label htmlFor='first_name'>First Name:</label>
                     <input
                       className="form-control"
-                      required={true}
                       type="text"
                       name="first_name"
+                      id="first_name"
+                      required
                       value={this.state.first_name}
                       onChange={this.handleUserInput}
                     />
