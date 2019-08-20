@@ -297,7 +297,7 @@ describe("DonorCreate web form", () => {
     "houseno",
     "zipcode",
     "city",
-  //  "email",
+    "email",
   //  "ancestry"
   ].forEach(function(field_name) {
     create_required_field_test(
