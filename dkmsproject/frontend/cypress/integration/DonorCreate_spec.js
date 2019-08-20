@@ -69,24 +69,27 @@ describe("DonorCreate web form", () => {
 
   const tests = [
       {
-        donor: (() => {
+        donor_factory: () => {
           let donor = createSomeDonor();
           donor.dataprotectionprivacy = true;
-          return donor;})(),
+          return donor;
+        },
         desc: 'dataprotectionprivacy = true'
       },
       {
-        donor: (() => {
+        donor_factory: () => {
           let donor = createSomeDonor();
           donor.salutation = 'Mrs';
-          return donor;})(),
+          return donor;
+        },
         desc: "salutation = Mrs"
       },
       {
-        donor: (() => {
+        donor_factory: () => {
           let donor = createSomeDonor();
           donor.salutation = 'Mr';
-          return donor;})(),
+          return donor;
+        },
         desc: "salutation = Mr"
       },
     ];
@@ -97,7 +100,7 @@ describe("DonorCreate web form", () => {
       cy.visit("/");
 
       // And a donor
-      const donor = test.donor
+      const donor = test.donor_factory()
 
       // cy.pause()
       // When entering a donor into the web form
