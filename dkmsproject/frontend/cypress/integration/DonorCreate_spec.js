@@ -285,12 +285,12 @@ describe("DonorCreate web form", () => {
     "salutation",
     element => { return element.parent().parent(); },
     'Choose a salutation.');
-
+*/
    create_required_field_test(
      "dataprotectionprivacy",
-     element => { return element.parent().parent(); },
-     'This value is required.');
-*/
+     element => { return element.parent(); },
+     'Klicken Sie dieses Kästchen an, wenn Sie fortfahren möchten.');
+
   [
     "first_name",
     "last_name",

@@ -299,10 +299,14 @@ export default class DonorCreate extends React.Component {
                     <label>
                       Declaration of Consent:
                       <input
+                        className="form-control"
                         name="dataprotectionprivacy"
+                        id="dataprotectionprivacy"
+                        required
                         type="checkbox"
                         checked={this.state.dataprotectionprivacy}
                         onChange={this.handleUserInput} />
+                      <div className="invalid-feedback" />
                     </label>
                   </div>
 
