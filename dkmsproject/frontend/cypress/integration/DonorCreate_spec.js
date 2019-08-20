@@ -293,7 +293,7 @@ describe("DonorCreate web form", () => {
   [
     "first_name",
     "last_name",
-  //  "street",
+    "street",
   //  "houseno",
   //  "zipcode",
   //  "city",
