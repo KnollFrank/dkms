@@ -296,7 +296,7 @@ describe("DonorCreate web form", () => {
     "street",
     "houseno",
     "zipcode",
-  //  "city",
+    "city",
   //  "email",
   //  "ancestry"
   ].forEach(function(field_name) {

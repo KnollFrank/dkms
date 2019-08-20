@@ -228,6 +228,8 @@ export default class DonorCreate extends React.Component {
                       className="form-control"
                       type="text"
                       name="city"
+                      id="city"
+                      required
                       value={this.state.city}
                       onChange={this.handleUserInput}
                     />
