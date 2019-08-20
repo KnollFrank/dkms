@@ -280,12 +280,11 @@ describe("DonorCreate web form", () => {
      });
   };
 
-  /*
   create_required_field_test(
     "salutation",
-    element => { return element.parent().parent(); },
-    'Choose a salutation.');
-*/
+    element => { return element.parent(); },
+    'Wählen Sie eine dieser Optionen aus.Wählen Sie eine dieser Optionen aus.');
+
    create_required_field_test(
      "dataprotectionprivacy",
      element => { return element.parent(); },

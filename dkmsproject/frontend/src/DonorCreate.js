@@ -71,6 +71,7 @@ export default class DonorCreate extends React.Component {
                     <div className="form-check">
                       <label>
                         <input
+                          className="form-control"
                           name="salutation"
                           type="radio"
                           value="Mr"
@@ -79,12 +80,14 @@ export default class DonorCreate extends React.Component {
                           onChange={this.handleUserInput}
                         />
                         Mr
+                        <div className="invalid-feedback" />
                       </label>
                     </div>
 
                     <div className="form-check">
                       <label>
                         <input
+                          className="form-control"
                           name="salutation"
                           type="radio"
                           value="Mrs"
@@ -93,9 +96,9 @@ export default class DonorCreate extends React.Component {
                           onChange={this.handleUserInput}
                         />
                         Mrs
+                        <div className="invalid-feedback" />
                       </label>
                     </div>
-                    <div className="invalid-feedback" />
                   </div>
 
                   <div className="form-group">
