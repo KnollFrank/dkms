@@ -4,7 +4,6 @@ import Form from './Form';
 import DonorsService from './DonorsService';
 
 // TODO: this form should look exactly like the online DKMS web form
-// TODO: required fields shall be marked with an *
 export default class DonorCreate extends React.Component {
     constructor(props) {
       super(props);
@@ -67,7 +66,7 @@ export default class DonorCreate extends React.Component {
               <div className={"card-body"}>
                 <Form submit={this.submit}>
                   <div className="form-group">
-                    <label htmlFor='salutation'>Salutation:</label>
+                    <label htmlFor='salutation'>Salutation *</label>
                     <div className="form-check">
                       <label>
                         <input
@@ -116,7 +115,7 @@ export default class DonorCreate extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor='ancestry'>Ancestry:</label>
+                    <label htmlFor='ancestry'>Ancestry *</label>
                     <select className="form-control"
                             name="ancestry"
                             id="ancestry"
@@ -135,7 +134,7 @@ export default class DonorCreate extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor='first_name'>First Name:</label>
+                    <label htmlFor='first_name'>First Name *</label>
                     <input
                       className="form-control"
                       type="text"
@@ -149,7 +148,7 @@ export default class DonorCreate extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor='last_name'>Last Name:</label>
+                    <label htmlFor='last_name'>Last Name *</label>
                     <input
                       className="form-control"
                       type="text"
@@ -163,7 +162,7 @@ export default class DonorCreate extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor='email'>Email:</label>
+                    <label htmlFor='email'>Email *</label>
                     <input
                       className="form-control"
                       type="email"
@@ -177,7 +176,7 @@ export default class DonorCreate extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor='phone'>Phone:</label>
+                    <label htmlFor='phone'>Phone</label>
                     <input
                       className="form-control"
                       type="text"
@@ -194,7 +193,7 @@ export default class DonorCreate extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor='mobile'>Mobile:</label>
+                    <label htmlFor='mobile'>Mobile</label>
                     <input
                       className="form-control"
                       type="text"
@@ -206,7 +205,7 @@ export default class DonorCreate extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor='address'>Address:</label>
+                    <label htmlFor='address'>Address</label>
                     <input
                       className="form-control"
                       type="text"
@@ -218,7 +217,7 @@ export default class DonorCreate extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor='street'>Street:</label>
+                    <label htmlFor='street'>Street *</label>
                     <input
                       className="form-control"
                       type="text"
@@ -232,7 +231,7 @@ export default class DonorCreate extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor='city'>City:</label>
+                    <label htmlFor='city'>City *</label>
                     <input
                       className="form-control"
                       type="text"
@@ -246,7 +245,7 @@ export default class DonorCreate extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor='houseno'>House number:</label>
+                    <label htmlFor='houseno'>House number *</label>
                     <input
                       className="form-control"
                       type="text"
@@ -260,7 +259,7 @@ export default class DonorCreate extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor='zipcode'>ZIP:</label>
+                    <label htmlFor='zipcode'>ZIP *</label>
                     <input
                       className="form-control"
                       type="text"
@@ -274,7 +273,7 @@ export default class DonorCreate extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor='co'>c/o:</label>
+                    <label htmlFor='co'>c/o</label>
                     <input
                       className="form-control"
                       type="text"
@@ -286,7 +285,7 @@ export default class DonorCreate extends React.Component {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor='apartment'>Apartment:</label>
+                    <label htmlFor='apartment'>Apartment</label>
                     <input
                       className="form-control"
                       type="text"
@@ -299,7 +298,7 @@ export default class DonorCreate extends React.Component {
 
                   <div className="form-group">
                     <label>
-                      Declaration of Consent:
+                      Declaration of Consent *
                       <input
                         className="form-control"
                         name="dataprotectionprivacy"
