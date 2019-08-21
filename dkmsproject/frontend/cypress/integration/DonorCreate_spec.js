@@ -257,7 +257,6 @@ describe("DonorCreate web form", () => {
     '1234567890L',
     'Ihre Eingabe muss mit dem geforderten Format übereinstimmen.');
 
-  // TODO: additionally maxlength="20"
   create_invalid_field_test(
     "phone",
     '123456',

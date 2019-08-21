@@ -182,6 +182,7 @@ export default class DonorCreate extends React.Component {
                       className="form-control"
                       type="text"
                       name="phone"
+                      id="phone"
                       value={this.state.phone}
                       onChange={this.handleUserInput}
                       pattern="[\d\+\s]*"
@@ -189,12 +190,11 @@ export default class DonorCreate extends React.Component {
                       minlength="7"
                       maxlength="20"
                     />
-                    <small className="form-text text-muted">Must be at least 6 characters long, contain letters and numbers</small>
                     <div className="invalid-feedback" />
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor='phone'>Mobile:</label>
+                    <label htmlFor='mobile'>Mobile:</label>
                     <input
                       className="form-control"
                       type="text"
@@ -202,7 +202,6 @@ export default class DonorCreate extends React.Component {
                       value={this.state.mobile}
                       onChange={this.handleUserInput}
                     />
-                    <small className="form-text text-muted">Must be at least 6 characters long, contain letters and numbers</small>
                     <div className="invalid-feedback" />
                   </div>
 
