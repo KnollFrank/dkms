@@ -252,11 +252,16 @@ describe("DonorCreate web form", () => {
     "invalid email",
     'Die E-Mail-Adresse muss ein @-Zeichen enthalten.');
 
-    // TODO: additionally check minlength="7" and maxlength="20"
   create_invalid_field_test(
     "phone",
     '1234567890L',
     'Ihre Eingabe muss mit dem geforderten Format übereinstimmen.');
+
+  // TODO: additionally maxlength="20"
+  create_invalid_field_test(
+    "phone",
+    '123456',
+    'Verlängern Sie diesen Text auf mindestens 7 Zeichen. Derzeit verwenden Sie 6 Zeichen.');
 
   [
     {
