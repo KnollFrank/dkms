@@ -45,7 +45,6 @@ class PrivateAddress(models.Model):
     address =  models.TextField(blank=True, null=True)
     street =  models.CharField(max_length=255, blank=True, null=True)
     city =  models.CharField(max_length=255, blank=True, null=True)
-    # TODO: add validation to zipcode
     zipcode = models.CharField(max_length=20, blank=True)
     houseno =  models.CharField(max_length=255, blank=True, null=True)
     co = models.CharField(max_length=255, blank=True)
@@ -331,6 +330,7 @@ class DeclarationOfConsent(models.Model):
         return self.dataprotectionprivacy
 
 # TODO: some fields shall be nullable, some not, see the online DKMS web form for reference
+# TODO: add the same validations to model fields as present in frontend's html form fields.
 class Donor(models.Model):
     personal_information = models.OneToOneField(
         PersonalInformation,
