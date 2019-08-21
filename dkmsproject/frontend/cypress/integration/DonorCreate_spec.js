@@ -257,10 +257,17 @@ describe("DonorCreate web form", () => {
     '1234567890L',
     'Ihre Eingabe muss mit dem geforderten Format übereinstimmen.');
 
+/*
   create_invalid_field_test(
     "phone",
     '123456',
     'Verlängern Sie diesen Text auf mindestens 7 Zeichen. Derzeit verwenden Sie 6 Zeichen.');
+*/
+
+  create_invalid_field_test(
+    "zipcode",
+    '7280',
+    'Ihre Eingabe muss mit dem geforderten Format übereinstimmen.');
 
   [
     {

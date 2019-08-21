@@ -266,6 +266,7 @@ export default class DonorCreate extends React.Component {
                       name="zipcode"
                       id="zipcode"
                       required
+                      pattern="\d{5}"
                       value={this.state.zipcode}
                       onChange={this.handleUserInput}
                     />
