@@ -95,7 +95,7 @@ describe("DonorCreate web form", () => {
     ];
 
   tests.forEach(function(test) {
-    it("should create a donor having " + test.desc + " using a web form", () => {
+    xit("should create a donor having " + test.desc + " using a web form", () => {
       // Given a web form
       cy.visit("/");
 
@@ -225,41 +225,38 @@ describe("DonorCreate web form", () => {
       .should('be.visible');
   }
 
-  it("should not accept an invalid email", () => {
-    cy.visit("/");
+  function create_invalid_field_test(field_name, invalid_content, error_message) {
+    it("should not accept an invalid " + field_name, () => {
+      cy.visit("/");
 
-    cy.get('[id="root"]').within(() => {
-      cy
-        .get('input[name="email"]')
-        .type("invalid email");
+      cy.get('[id="root"]').within(() => {
+        cy
+          .get('input[name="' + field_name + '"]')
+          .type(invalid_content);
 
-      cy.get('form').submit();
+        cy.get('form').submit();
 
-      assertErrorMessage("email", 'Die E-Mail-Adresse muss ein @-Zeichen enthalten.');
-     });
-
-    cy
-      .request("http://127.0.0.1:8000/api/backend/")
-      .then((response) => {
-        expect(response.body).to.have.lengthOf(0);
+        assertErrorMessage(field_name, error_message);
        });
-  });
 
-  // TODO: DRY with "should not accept an invalid email"
-  // TODO: additionally check minlength="7" and maxlength="20"
-  it("should not accept an invalid phone", () => {
-    cy.visit("/");
-
-    cy.get('[id="root"]').within(() => {
       cy
-        .get('input[name="phone"]')
-        .type('1234567890L')
+        .request("http://127.0.0.1:8000/api/backend/")
+        .then((response) => {
+          expect(response.body).to.have.lengthOf(0);
+         });
+    });
+  }
 
-      cy.get('form').submit();
+  create_invalid_field_test(
+    "email",
+    "invalid email",
+    'Die E-Mail-Adresse muss ein @-Zeichen enthalten.');
 
-      assertErrorMessage("phone", 'Ihre Eingabe muss mit dem geforderten Format übereinstimmen.');
-     });
-  });
+    // TODO: additionally check minlength="7" and maxlength="20"
+  create_invalid_field_test(
+    "phone",
+    '1234567890L',
+    'Ihre Eingabe muss mit dem geforderten Format übereinstimmen.');
 
   [
     {
