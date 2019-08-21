@@ -216,6 +216,15 @@ describe("DonorCreate web form", () => {
     });
   });
 
+  function assertErrorMessage(field_name, error_message) {
+    cy
+      .get('[name="' + field_name + '"]')
+      .parent()
+      .find('.invalid-feedback')
+      .should('contain.text', error_message)
+      .should('be.visible');
+  }
+
   it("should not accept an invalid email", () => {
     cy.visit("/");
 
@@ -226,12 +235,7 @@ describe("DonorCreate web form", () => {
 
       cy.get('form').submit();
 
-      cy
-       .get('input[name="email"]')
-       .parent()
-       .find('.invalid-feedback')
-       .should('contain.text', 'Die E-Mail-Adresse muss ein @-Zeichen enthalten.')
-       .should('be.visible');
+      assertErrorMessage("email", 'Die E-Mail-Adresse muss ein @-Zeichen enthalten.');
      });
 
     cy
@@ -253,12 +257,7 @@ describe("DonorCreate web form", () => {
 
       cy.get('form').submit();
 
-      cy
-       .get('input[name="phone"]')
-       .parent()
-       .find('.invalid-feedback')
-       .should('contain.text', 'Ihre Eingabe muss mit dem geforderten Format übereinstimmen.')
-       .should('be.visible');
+      assertErrorMessage("phone", 'Ihre Eingabe muss mit dem geforderten Format übereinstimmen.');
      });
   });
 
@@ -308,12 +307,7 @@ describe("DonorCreate web form", () => {
       cy.visit("/");
       cy.get('[id="root"]').within(() => {
         cy.get('form').submit();
-        cy
-          .get('[name="' + test.field_name + '"]')
-          .parent()
-          .find('.invalid-feedback')
-          .should('contain.text', test.error_text)
-          .should('be.visible');
+        assertErrorMessage(test.field_name, test.error_text);
        });
      });
   });
