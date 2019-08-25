@@ -150,7 +150,7 @@ export default class DonorCreate extends React.Component {
                         <li class="fieldwrapper address   block ">
                           <label for="id_address">Address
                           </label>
-                          <input className="form-control" type="text" name="address" value={this.state.address} onChange={this.handleUserInput}/>
+                          <input className="form-control" type="text" id="id_address" name="address" value={this.state.address} onChange={this.handleUserInput}/>
                           <div className="invalid-feedback"/>
                         </li>
                         <li class="fieldwrapper address_error_field   ">
@@ -160,13 +160,13 @@ export default class DonorCreate extends React.Component {
                           </label>
                           <input type="text" name="address_error_field" disabled="disabled" id="id_address_error_field"/></li>
                         <li class="fieldwrapper street required">
-                          <label for="id_street">Street
+                          <label for="street">Street
                           </label>
                           <input className="form-control" type="text" name="street" id="street" required="required" value={this.state.street} onChange={this.handleUserInput}/>
                           <div className="invalid-feedback"/>
                         </li>
                         <li class="fieldwrapper houseno required">
-                          <label for="id_houseno">House number
+                          <label for="houseno">House number
                           </label>
                           <input className="form-control" type="text" name="houseno" id="houseno" required="required" value={this.state.houseno} onChange={this.handleUserInput}/>
                           <div className="invalid-feedback"/>
@@ -174,22 +174,22 @@ export default class DonorCreate extends React.Component {
                         <li class="fieldwrapper apartment">
                           <label for="id_apartment">Apartment (optional)
                           </label>
-                          <input className="form-control" type="text" name="apartment" value={this.state.apartment} onChange={this.handleUserInput}/>
+                          <input className="form-control" type="text" id="id_apartment" name="apartment" value={this.state.apartment} onChange={this.handleUserInput}/>
                           <div className="invalid-feedback"/>
                         </li>
                         <li class="fieldwrapper co_field">
                           <label for="id_co_field" class="input-hidden">Show c/o input field</label>
-                          <input className="form-control" type="text" name="co" value={this.state.co} onChange={this.handleUserInput}/>
+                          <input className="form-control" type="text" id="id_co_field" name="co" value={this.state.co} onChange={this.handleUserInput}/>
                           <div className="invalid-feedback"/>
                         </li>
                         <li class="fieldwrapper zipcode required">
-                          <label for="id_zipcode">ZIP
+                          <label for="zipcode">ZIP
                           </label>
                           <input className="form-control" type="text" name="zipcode" id="zipcode" required="required" pattern="\d{5}" value={this.state.zipcode} onChange={this.handleUserInput}/>
                           <div className="invalid-feedback"/>
                         </li>
                         <li class="fieldwrapper city required">
-                          <label for="id_city">City
+                          <label for="city">City
                           </label>
                           <input className="form-control" type="text" name="city" id="city" required="required" value={this.state.city} onChange={this.handleUserInput}/>
                           <div className="invalid-feedback"/>
@@ -224,19 +224,19 @@ export default class DonorCreate extends React.Component {
                     <div class="row">
                       <ul>
                         <li class="fieldwrapper phone   ">
-                          <label for="id_phone">Telephone number (private)
+                          <label for="phone">Telephone number (private)
                           </label>
                           <input className="form-control" type="text" name="phone" id="phone" value={this.state.phone} onChange={this.handleUserInput} pattern="[\d\+\s]*" inputmode="numeric" minlength="7" maxlength="20"/>
                           <div className="invalid-feedback"/>
                         </li>
                         <li class="fieldwrapper mobile   ">
-                          <label for="id_mobile">Cell phone number
+                          <label for="mobile">Cell phone number
                           </label>
                           <input className="form-control" type="text" name="mobile" value={this.state.mobile} onChange={this.handleUserInput}/>
                           <div className="invalid-feedback"/>
                         </li>
                         <li class="fieldwrapper email required   ">
-                          <label for="id_email" class="hasInfoMessage">Email address (private if possible)
+                          <label for="email" class="hasInfoMessage">Email address (private if possible)
                             <div class="infoMessage" style={{
                                 height: '85px',
                                 top: '-90px'
@@ -275,7 +275,7 @@ export default class DonorCreate extends React.Component {
                     <div class="row">
                       <ul>
                         <li class="fieldwrapper ancestry required   ">
-                          <label for="id_ancestry">Ancestry
+                          <label for="ancestry">Ancestry
                           </label>
                           <select className="form-control" name="ancestry" id="ancestry" required="required" value={this.state.ancestry} onChange={this.handleUserInput}>
                             <option value="" selected="selected">Please select</option>
@@ -287,8 +287,6 @@ export default class DonorCreate extends React.Component {
                           </select>
                           <div className="invalid-feedback"/>
                         </li>
-                        <li>
-                          <input type="hidden" name="source" value="SOC001"/></li>
                       </ul>
                     </div>
                   </fieldset>
@@ -319,7 +317,7 @@ export default class DonorCreate extends React.Component {
                     <div class="row">
                       <ul>
                         <li class="fieldwrapper dataprotectionprivacy required   ">
-                          <label for="id_dataprotectionprivacy">I hereby consent to the processing of my personal data in order to send a registration kit with a pre-filled consent form and related queries. I confirm I have read the notes on
+                          <label for="dataprotectionprivacy">I hereby consent to the processing of my personal data in order to send a registration kit with a pre-filled consent form and related queries. I confirm I have read the notes on
                             <a href="https://www.dkms.de/en/privacy-policy" target="_blank">data protection</a>.
                           </label>
                           <input className="form-control" name="dataprotectionprivacy" id="dataprotectionprivacy" required="required" type="checkbox" checked={this.state.dataprotectionprivacy} onChange={this.handleUserInput}/>
