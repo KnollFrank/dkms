@@ -1,18 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <meta name="theme-color" content="#000000" />
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    .pac-container {
+      background-color: #fff;
+      position: absolute !important;
+      z-index: 1000;
+      border-radius: 2px;
+      border-top: 1px solid #d9d9d9;
+      font-family: Arial, sans-serif;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      overflow: hidden
+    }
+
+    .pac-logo:after {
+      content: "";
+      padding: 1px 1px 1px 0;
+      height: 18px;
+      box-sizing: border-box;
+      text-align: right;
+      display: block;
+      background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png);
+      background-position: right;
+      background-repeat: no-repeat;
+      background-size: 120px 14px
+    }
+
+    .hdpi.pac-logo:after {
+      background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3_hdpi.png)
+    }
+
+    .pac-item {
+      cursor: default;
+      padding: 0 4px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      line-height: 30px;
+      text-align: left;
+      border-top: 1px solid #e6e6e6;
+      font-size: 11px;
+      color: #999
+    }
+
+    .pac-item:hover {
+      background-color: #fafafa
+    }
+
+    .pac-item-selected,
+    .pac-item-selected:hover {
+      background-color: #ebf2fe
+    }
+
+    .pac-matched {
+      font-weight: 700
+    }
+
+    .pac-item-query {
+      font-size: 13px;
+      padding-right: 3px;
+      color: #000
+    }
+
+    .pac-icon {
+      width: 15px;
+      height: 20px;
+      margin-right: 7px;
+      margin-top: 6px;
+      display: inline-block;
+      vertical-align: top;
+      background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons.png);
+      background-size: 34px
+    }
+
+    .hdpi .pac-icon {
+      background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/autocomplete-icons_hdpi.png)
+    }
+
+    .pac-icon-search {
+      background-position: -1px -1px
+    }
+
+    .pac-item-selected .pac-icon-search {
+      background-position: -18px -1px
+    }
+
+    .pac-icon-marker {
+      background-position: -1px -161px
+    }
+
+    .pac-item-selected .pac-icon-marker {
+      background-position: -18px -161px
+    }
+
+    .pac-placeholder {
+      color: gray
+    }
+  </style>
+  <link rel="stylesheet" href="./DKMS-en_files/app.min.b2d7eb9d92e7.css">
+  <meta name="theme-color" content="#000000" />
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -21,12 +120,34 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+  <title>React App</title>
+</head>
+
+<body class="entity-dkms_de lang-en country-DE en_DE context-prod package-registration variant-default source-SOC001">
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <header>
+    <a href="https://www.dkms.de/en" title="Home" rel="home" id="logo">
+      <img src="./DKMS-en_files/logo_black_english.png" alt="Home">
+    </a>
+
+    <a href="https://webforms.dkms.de/en/DE/register/?source=SOC001&amp;birthdate=1972-10-17&amp;weight=90&amp;height=183#" class="menu-link"><span class="burger">menu</span><span class="close"></span></a>
+
+    <nav class="mobile"></nav>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h1 class="main-title brushed">Register as a Donor!</h1>
+      <ol>
+        <li></li>
+        <li class="active"></li>
+        <li></li>
+      </ol>
+    </section>
+
     <div id="root"></div>
-    <!--
+  </main>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -36,10 +157,7 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>    
-  </body>
+  <!-- Optional JavaScript -->
+</body>
+
 </html>
