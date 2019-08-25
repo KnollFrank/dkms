@@ -59,7 +59,7 @@ describe("DonorCreate web form", () => {
       street: 'some street',
       city: 'some city',
       houseno: '4711',
-      zipcode: '0815',
+      zipcode: '72805',
       co: 'some co',
       apartment: 'some apartment',
       ancestry: 'DE',
@@ -95,7 +95,7 @@ describe("DonorCreate web form", () => {
     ];
 
   tests.forEach(function(test) {
-    xit("should create a donor having " + test.desc + " using a web form", () => {
+    it("should create a donor having " + test.desc + " using a web form", () => {
       // Given a web form
       cy.visit("/");
 
