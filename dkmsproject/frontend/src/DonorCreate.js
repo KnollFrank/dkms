@@ -4,6 +4,7 @@ import Form from './Form';
 import DonorsService from './DonorsService';
 
 // TODO: this form should look exactly like the online DKMS web form
+// TODO: use https://parsleyjs.org/ for validation?
 export default class DonorCreate extends React.Component {
   constructor(props) {
     super(props);
